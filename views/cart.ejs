@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script type="text/javascript" src="app.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="/stylesheets/cart.css">
+  <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900' rel='stylesheet' type='text/css'>
+  <title>iamRapid</title>
+  <style>
+  </style>
+</head>
+
+<body>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+
+<!--navbar-------------------------------------------------------------------------------------------------------------------------->
+<nav class="navbar fixed-top  navbar-expand-md navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">IamRapid</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Contact Us</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">About Us</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!---------------------------------------------------------------------------------------------------------------------------------->
+<div class="container marginNav">
+    <hr>
+    <div class="row">
+        <div class="col-md-12 m-auto ">
+            <div class="row">
+                <div class="col-md-9 m-auto ">
+                    <h1>My cart</h1>
+                </div>
+                <div class="col-md-3 m-auto ">
+                    <a href="/"><h3>Back to Uploads</h3></a>
+                </div>
+            </div>    
+            <hr>
+    </div>
+
+        <div class="col-md-9 m-auto" style="border-right: 1px solid black">
+          <div class="container">
+            <div class="row">
+              <% var totalprice = 0 %>
+                <% obj.forEach(function(data){ %>
+                    <% totalprice = totalprice + data.price %>
+                    <div class="col-lg-12 col-md-12 shadow" style="border: 1px solid darkgray; margin: 10px 0; height:150px; border-radius:  .5rem .5rem "  >
+   
+                        <div class="row">
+                            <div class="thumbnail col-lg-3 col-md-3" style="border-right: 1px solid darkgray; height:148px; ">
+                                <%console.log(data.cartFileName)%>
+                                <%console.log(data.quantity)%>
+
+                                <img src="/<%=data.cartFileName%>.jpg" height="80%"/>
+                            </div>
+    
+                            <div class="col-lg-6 col-md-6 addBackgroundColor" style="border-right: 1px solid darkgray; height:148px;">
+                                <p><h4><%=data.cartFileName%></h4></p>
+                                <p> ₹<%= (Number(data.price))%> X <%=data.quantity%></p>    
+     
+                            </div>
+                            <div class="col-lg-3 col-md-3 addBackgroundColor" style="height:148px; border-radius: 0 .5rem .5rem 0">
+                                <h4 style="margin-top: 20px">Price : ₹ <span><%=data.price%></span></h4>
+                                <a style="margin-top: 35px padding: 5px 0" href="/deletecart/<%=data._id%>" name="delete" class="btn btn-sm animated-button victoria-one" value="<%=data.name%>">&nbsp;Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                <% }); %>
+            </div>
+          </div>  
+        </div>
+        <div class="col-md-3 ">
+          
+            <p>Subtotal : <%= additionaldata.totalp %></p>
+            <p>Shipping Charges</p>
+            <p>Tax</p>
+            <p><strong>Total</strong></p>
+            <form action="/purchase" method="POST">
+              <!-- Note that the amount is in paise = 50 INR -->
+              <script
+                src="https://checkout.razorpay.com/v1/checkout.js"
+                data-key="rzp_test_2ZhVhf0meouzDo"
+                data-amount="<%=additionaldata.totalp%>00"
+                data-buttontext="Pay"
+                data-name="IamRapid"
+                data-description="3D-printing"
+                data-image="<%=additionaldata.image%>"
+                data-prefill.name="<%=additionaldata.username%>"
+                data-prefill.email=""
+                data-theme.color="#F37254"
+              ></script>
+              <input type="hidden" value="Hidden Element" name="hidden">
+            </form>
+        </div>    
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  <script>
+  // $("document").ready(function(){
+  // // Number sum=0;
+  //   $("h4 span").each(function(index){
+  //     Number x = Number($( this ).text());
+  //     //sum=sum+Number(x);
+  //   });
+  //   //console.log(sum);
+  // });
+  </script>
+  
+  <script>
+    
+  </script>
+  
+ <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+</body>
+</html>

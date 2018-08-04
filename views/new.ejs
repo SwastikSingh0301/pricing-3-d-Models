@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="/stylesheets/main.css">
+  <!--<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900' rel='stylesheet' type='text/css'>-->
+  <title>iamRapid</title>
+  <style>
+   
+  </style>
+</head>
+
+<body>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+
+<!--navbar-------------------------------------------------------------------------------------------------------------------------->
+<nav class="navbar fixed-top  navbar-expand-md navbar-dark bg-dark">
+  <a class="navbar-brand" href="/">IamRapid</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/t">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Contact Us</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">About Us</a>
+      </li>
+    </ul>
+    <div class="form-inline my-2 my-lg-0">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><a href="/mycart" >Cart :  <span id="cartItems"><%=cartItems%></span> </a></button>
+    </div>
+  </div>
+</nav>
+
+<!---------------------------------------------------------------------------------------------------------------------------------->
+<div class="container marginNav">
+  <hr>
+<div class="row">
+    <div class="col-md-12 m-auto ">
+      <!--<h1 class="text-center display-4 my-4">Home Page</h1>-->
+      
+      <!--<div class="custom-file mb-3" style = "border : 1px solid black">-->
+      <form action="/upload" method="POST" enctype="multipart/form-data" ref='uploadForm' 
+        id='uploadForm' class="fileupload ddColor " style=" height:200px">
+        <div class="custom-file mb-3 shadow ddColor" style="height:200px; border: 2px solid lightgray">
+            <input type="file" name="sampleFile" class="custom-file-input ddColor " onchange="form.submit()" style="height:200px"/>
+            <label for="file" class="custom-file-label ddColor" >
+              <p>  </p>
+              <h2> Drag and Drop files or Click to upload</h2>
+              <hr>
+              <h5>Supported file formats:</h5>
+              <p>.stl or .zip</p>
+            </label>
+        </div>
+      </form>
+      <!--</div>-->
+      
+      <hr>
+    </div>
+
+<div class="container">
+  <div class="row">
+<% var counter = 0; %>
+<% obj.forEach(function(data){ %>
+  <% counter = counter + 1; %>
+  <% var counterstr = counter.toString(); %>
+  <% console.log(counterstr); %>
+  <div class="col-lg-12 col-md-12 shadow" style="border: 1px solid darkgray; margin: 10px 0; height:300px; border-radius:  .5rem .5rem "  >
+   
+    <div class="row">
+    <div class="thumbnail col-lg-4 col-md-4" style="border-right: 1px solid darkgray; height:298px; background-color:white; ">
+        <img src="/<%=data.fileName%>.jpg" height="80%"/>
+    </div>
+    
+    <div class="col-lg-4 col-md-4 addBackgroundColor" style="border-right: 1px solid darkgray; height:298px;">
+        <h5 style="margin-top:10px;"><%=data.fileName%></h5>
+        <div style="margin-top:5px;">
+            <select class="custom-select" id="printer<%=counter.toString();%>">
+              <!--<option value="1" default id="disablePT<%=counter.toString();%>" >Printer (default-FDM Printer)</option>-->
+              <!--<input type="text" name="filename"      id = "filename"      value="<%=data.fileName%>"  style="display : none"/>-->
+              <!--<input type="text" name="fileweight"    id = "fileweight"    value="<%=data.weight%>"    style="display : none"/>-->
+              <!--<input type="text" name="fileprinttime" id = "fileprinttime" value="<%=data.printTime%>" style="display : none"/>-->
+              <option value="1" density="1.2" selected = "selected">FDM Printer</option>
+              <option value="2" density="1.2">SLA Printer</option>
+            </select>
+        </div>
+        <div id="printer1<%=counter.toString();%>">
+            <!--<select class="custom-select" id="material<%=counter.toString();%>">-->
+            <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(10*Math.ceil(Number(data.weight)*0.00125+2))+100%>" default id="disableMT<%=counter.toString();%>" >Material (default-PLA(White))</option>-->
+            <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(10*Math.ceil(Number(data.weight)*0.00125+2))+100%>" density="1.25">PLA (White)</option>-->
+            <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(10*Math.ceil(Number(data.weight)*0.00125+2))+100%>" density="1.25">PLA (Black)</option>-->
+            <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(10*Math.ceil(Number(data.weight)*0.00125+2))+100%>" density="1.25">PLA (Brown)</option>-->
+            <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(10*Math.ceil(Number(data.weight)*0.00125+2))+100%>" density="1.25">PLA (Yellow)</option>-->
+            <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(10*Math.ceil(Number(data.weight)*0.00125+2))+100%>" density="1.25">PLA (Blue)</option>-->
+            <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(10*Math.ceil(Number(data.weight)*0.00125+2))+100%>" density="1.25">PLA (Green)</option>-->
+            <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(10*Math.ceil(Number(data.weight)*0.00125+2))+100%>" density="1.25">PLA (Red)</option>-->
+            <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(12*Math.ceil(Number(data.weight)*0.00125+2))+100%>" density="1.25">PLA (Transparent)</option>-->
+            <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(12*Math.ceil(Number(data.weight)*0.00125+2))+100%>" density="1.25">ABS (White)</option>-->
+            <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(12*Math.ceil(Number(data.weight)*0.00125+2))+100%>" density="1.25">ABS (Black)</option>-->
+            <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(12*Math.ceil(Number(data.weight)*0.00125+2))+100%>" density="1.25">ABS (Brown)</option>-->
+            <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(12*Math.ceil(Number(data.weight)*0.00125+2))+100%>" density="1.25">ABS (Yellow)</option>-->
+            <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(12*Math.ceil(Number(data.weight)*0.00125+2))+100%>" density="1.25">ABS (Blue)</option>-->
+            <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(12*Math.ceil(Number(data.weight)*0.00125+2))+100%>" density="1.25">ABS (Green)</option>-->
+            <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(12*Math.ceil(Number(data.weight)*0.00125+2))+100%>" density="1.25">ABS (Red)</option>-->
+            <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(15*Math.ceil(Number(data.weight)*0.00121+2))+100%>" density="1.21">Flexible</option>-->
+            <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(25*Math.ceil(Number(data.weight)*0.00130+2))+100%>" density="1.3">Carbon Fibre</option>-->
+            <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(25*Math.ceil(Number(data.weight)*0.00110+2))+100%>" density="1.1">Nylon</option>-->
+            <!--  <input type="text" name="fileName" value="<%=data.fileName%>" style="display : none"/>-->
+            <!--</select>-->
+            <select class="custom-select" id="material<%=counter.toString();%>">
+              <!--<option value="PLA(white)" default id="disableMT<%=counter.toString();%>" >Material (default-PLA(White))</option>-->
+              <option value="PLA(white)" density="1.25" selected = "selected">PLA (White)</option>
+              <option value="PLA(black)" density="1.25">PLA (Black)</option>
+              <option value="PLA(brown)" density="1.25">PLA (Brown)</option>
+              <option value="PLA(yellow)" density="1.25">PLA (Yellow)</option>
+              <option value="PLA(blue)" density="1.25">PLA (Blue)</option>
+              <option value="PLA(green)" density="1.25">PLA (Green)</option>
+              <option value="PLA(red)" density="1.25">PLA (Red)</option>
+              <option value="TRA(transparent)" density="1.25">PLA (Transparent)</option>
+              <option value="ABS(white)" density="1.25">ABS (White)</option>
+              <option value="ABS(black)" density="1.25">ABS (Black)</option>
+              <option value="ABS(brown)" density="1.25">ABS (Brown)</option>
+              <option value="ABS(yellow)" density="1.25">ABS (Yellow)</option>
+              <option value="ABS(blue)" density="1.25">ABS (Blue)</option>
+              <option value="ABS(green)" density="1.25">ABS (Green)</option>
+              <option value="ABS(red)" density="1.25">ABS (Red)</option>
+              <option value="FLE(flexible)" density="1.21">Flexible</option>
+              <option value="CAR(carbonfibre)" density="1.3">Carbon Fibre</option>
+              <option value="NYL(nylon)" density="1.1">Nylon</option>
+              <input type="text" name="fileName" value="<%=data.fileName%>" style="display : none"/>
+            </select>
+        </div>
+        <div id="printer2<%=counter.toString()%>">  
+            <!--<select class="custom-select" id="material2<%=counter.toString();%>">-->
+            <!--  <option value="<%=Math.ceil((100*Math.ceil(Number(data.weight)*0.0012+2))+100)%>" default id="disableMT2<%=counter.toString();%>" >Material (default-Solid Resin)</option>-->
+            <!--  <option value="<%=Math.ceil((100*Math.ceil(Number(data.weight)*0.0012+2))+100)%>" density="1.2">Solid Resin</option>-->
+            <!--  <option value="<%=Math.ceil((200*Math.ceil(Number(data.weight)*0.0012+2))+100)%>" density="1.2">Casting Resin</option>-->
+            <!--  <input type="text" name="fileName" value="<%=data.fileName%>" style="display : none"/>-->
+            <!--</select>-->
+            <select class="custom-select" id="material2<%=counter.toString();%>">
+              <!--<option value="SRN(solidresin)" default id="disableMT2<%=counter.toString();%>" >Material (default-Solid Resin)</option>-->
+              <option value="SRN(solidresin)" density="1.2" selected = "selected">Solid Resin</option>
+              <option value="CRN(castresin)" density="1.2">Casting Resin</option>
+              <input type="text" name="fileName" value="<%=data.fileName%>" style="display : none"/>
+            </select>
+        </div>
+      
+      <form action="/modify/<%=data._id%>" method="POST" name="<%=data._id%>" id="modifyVal<%=counter.toString()%>">
+        <input id = "modifyfilename<%=counter.toString()%>" type="text" name="fileName" value="<%=data.fileName%>" style="display : none"/>
+        <input id = "databaseId<%=counter.toString()%>" type="text" name="=databaseId" value="<%=data._id%>" style="display : none"/>
+        <div class="row">
+          <div class="col-lg-5 col-md-5" >
+            <label class="mr-sm-2" for="inlineFormCustomSelect"><p style="font-size:16px;">Layer Height</p></label>
+          </div>
+          <div class="col-lg-7 col-md-7" >
+          <select class="custom-select mr-sm-2" name="height" id="layerHeight<%=counter.toString()%>" >
+            <!--<option default id="disableLH<%=counter.toString()%>" value = "0.2">Normal 200µm</option>-->
+            <option value="0.1">Fine 100µm</option>
+            <option value="0.2" selected = "selected">Normal 200µm</option>
+            <option value="0.3">Coarse 300µm</option>
+            <!--<input type="text" name="fileName" value="<%=data.name%>" style="display : none"/>-->
+          </select>
+          </div>
+        </div>
+          <div class="row">
+            <div class="col-lg-5 col-md-5">
+              <label class="mr-sm-2" for="inlineFormCustomSelect"><p style="font-size:16px;">Infill</p></label>
+            </div>
+            <div class="col-lg-7 col-md-7">
+            <select class="custom-select mr-sm-2" id="infill<%=counter.toString()%>" name='infill'>
+              <!--<option default id="disableIF<%=counter.toString()%>" value = "1.1667">High 30%</option>-->
+              <option value="1.1667" selected = "selected">High 30%</option>
+              <option value="3.5">Medium 20%</option>
+              <option value="7.0">Low 10%</option>
+            </select>
+            </div>
+        </div>
+        <button id="submit<%=counter.toString()%>" type="submit" style="display : none" class="button2"><span>Submit </span></button>    
+      </form>
+    </div>
+    
+    <div class="col-lg-4 col-md-4 addBackgroundColor" style="height:298px; border-radius: 0 .5rem .5rem 0">
+        
+        <h4 style="margin-top:10px;"><strong>Price : ₹<span id="price<%=counter.toString()%>"> <%= data.price %></span></strong></h4><p style="margin-bottom:1px;"> (Exclusive of GST)</p>
+        <div class="form-row align-items-center" style="margin-top:1px;">
+          <div class="col-auto my-1">
+            <label class="mr-sm-2" for="inlineFormCustomSelect"><h5 class=''></h5></label>
+          </div>
+          <div class="qty-input">
+            <i id="qtyless<%=counter.toString()%>" class="less">-</i>
+              <input id="qty<%=counter.toString()%>" type="text" value="1"/>
+            <i id="qtymore<%=counter.toString()%>" class="more">+</i>
+          </div>
+        </div> 
+      <form action="/AddToCart/<%=data._id%>" id="<%=data._id%>" method="POST">
+        <input type="text" name="quantity"  id="quantity<%=counter.toString()%>" value="1"  style="display : none">
+        <input type="text" id="totalPrice<%=counter.toString()%>"  name="Price"  value="<%=Math.ceil(20*Number(data.printTime)+(10*Math.ceil(Number(data.weight)*0.00125+2))+100)%>"  style="display : none">
+        <input type="text" id="finalPrice<%=counter.toString()%>"  name="finalPrice"  value="<%=Math.ceil(20*Number(data.printTime)+(10*Math.ceil(Number(data.weight)*0.00125+2))+100)%>"  style="display : none">
+        <input type="text" name="fileName" value="<%=data.fileName%>" style="display : none"/>
+        <input type="text" id ="infilltocart<%=counter.toString()%>" name="infilltocart" value="30" style="display: none">
+        <input type="text" id ="layerheighttocart<%=counter.toString()%>" name="layerheighttocart" value="0.2" style="display: none">
+        <a href="#" class="btn btn-sm animated-button thar-one" onclick="document.getElementById('<%=data._id%>').submit();">Add to Cart</a> 
+        
+       
+        <a href="/delete/<%=data._id%>" name="delete" class="btn btn-sm animated-button victoria-one" value="<%=data.fileName%>">&nbsp;Delete</a>
+      </form>
+    </div>
+  </div>
+     
+    
+    
+  </div>
+  
+<% }); %>
+ </div>
+  </div>
+    
+</div>
+</div>
+<script>
+
+// on layer height change first instane
+$( "#layerHeight1" ).change(function(){
+  var lh = $( "#layerHeight1 option:selected" ).val();
+  // console.log(lh);
+  var name = $('#modifyfilename1').val();
+  var id = $('#databaseId1').val();
+  // console.log(name);
+  var inf = $( "#infill1 option:selected" ).val();
+  // console.log (typeof inf);
+  var printertype = $( "#printer1 option:selected" ).val();
+  console.log (printertype);
+  console.log (typeof printertype);
+  if (printertype === "1"){
+    var material =  $( "#material1 option:selected" ).val();
+    console.log (material);
+    console.log(typeof material);
+  }
+  else{
+    var material =  $( "#material21 option:selected" ).val();
+    console.log (material);
+    console.log(typeof material);
+  }
+  var material =  $( "#material1 option:selected" ).val();
+  console.log (material);
+  console.log(typeof material);
+  var url = "https://whispering-springs-49161.herokuapp.com/uploadfile/modify-layer-height/" + lh + "/" + inf + "/" + name + "/" + id + "/" + material;
+  fetch(url)
+  .then(function(res){
+    console.log(res);
+    return res.json()
+  })
+  .then(function (data){
+    console.log(data);
+    var price = data.price;
+    $('#price1').text(price);
+  })
+});
+
+
+
+
+// on infill change first instance
+$( "#infill1" ).change(function(){
+  var lh = $( "#layerHeight1 option:selected" ).val();
+  // console.log(lh);
+  var name = $('#modifyfilename1').val();
+  var id = $('#databaseId1').val();
+  // console.log(name);
+  var inf = $( "#infill1 option:selected" ).val();
+  // console.log (typeof inf);
+  var printertype = $( "#printer1 option:selected" ).val();
+  console.log (printertype);
+  console.log (typeof printertype);
+  if (printertype === "1"){
+    var material =  $( "#material1 option:selected" ).val();
+    console.log (material);
+    console.log(typeof material);
+  }
+  else{
+    var material =  $( "#material21 option:selected" ).val();
+    console.log (material);
+    console.log(typeof material);
+  }
+  var url = "https://whispering-springs-49161.herokuapp.com/uploadfile/modify-infill-percentage/" + inf + "/" + lh + "/" + name + "/" + id + "/" + material;
+  fetch(url)
+  .then(function(res){
+    console.log(res);
+    return res.json()
+  })
+  .then(function (data){
+    console.log(data);
+    var price = data.price;
+    $('#price1').text(price);
+  })
+});
+
+
+
+
+  
+  
+  // for first instance
+    $('#printer21').hide();
+    $( "#printer1" ).change(function(){
+      var id = $('#databaseId1').val();
+        // $("#disablePT1").prop('disabled',true);
+      var printerId = $( '#printer1' ).val();
+      console.log(printerId);
+      console.log (typeof printerId);
+      var url = "https://whispering-springs-49161.herokuapp.com/uploadfile/change-printer/" + id + "/" + printerId;
+      fetch(url)
+    .then(function(res){
+        console.log(res);
+        return res.json()
+      })
+        .then(function (data){
+        console.log(data);
+        var price = data.price;
+        $('#price1').text(price);
+      })
+
+      if(printerId === "1"){
+
+
+        $('#printer21').hide();
+        $('#printer11').show();
+        $('#modifyVal1').show();
+      }
+      else{
+        var x = ($( "#material21" ).val());
+
+        $('#printer11').hide();
+        $('#printer21').show();
+        $('#modifyVal1').hide();
+        }
+        // console.log(x);
+    });
+
+
+
+//  material FDM change first instance
+  $( "#material1" ).change(function(){
+  //   $("#disableMT1").prop('disabled',true);
+        var id = $('#databaseId1').val();
+        var material = ($( "#material1" ).val());
+        var printerId = $( '#printer1' ).val();
+        var url = "https://whispering-springs-49161.herokuapp.com/uploadfile/change-material/" + id + "/" + printerId + "/" + material;
+        fetch(url)
+        .then(function(res){
+          console.log(res);
+          return res.json()
+        })
+        .then(function (data){
+          console.log(data);
+          var price = data.price;
+          $('#price1').text(price);
+        })
+
+  });
+
+
+
+//  material sla change first instance
+  $( "#material21" ).change(function(){
+  //   $("#disableMT1").prop('disabled',true);
+        var id = $('#databaseId1').val();
+        var material = ($( "#material21" ).val());
+        var printerId = $( '#printer1').val();
+        var url = "https://whispering-springs-49161.herokuapp.com/uploadfile/change-material/" + id + "/" + printerId + "/" + material;
+        fetch(url)
+        .then(function(res){
+          console.log(res);
+          return res.json()
+        })
+        .then(function (data){
+          console.log(data);
+          var price = data.price;
+          $('#price1').text(price);
+        })
+
+  });
+
+
+
+
+// lets work on quantity
+
+  $("#qtymore1").click(function(){
+    val = $("#qty1").val();
+    $("#qty1").val(Number(val)+1);
+    var id = $('#databaseId1').val();
+    console.log(val);
+    console.log(typeof val);
+    var newval = $("#qty1").val();
+    console.log(newval);
+    console.log(typeof newval);
+    var price = $('#price1').text();
+    price = Number(price) / Number(val);
+    var newprice = price * Number(newval);
+    console.log (newprice);
+    newprice = newprice.toString();
+    $('#price1').text(newprice);
+    $('#qtymore1').hide();
+    $('#qtyless1').hide();
+
+    var url = "https://whispering-springs-49161.herokuapp.com/uploadfile/increase-quantity/" + id + "/" + newval;
+    fetch(url)
+    .then(function(res){
+      console.log(res);
+      return res.json()
+    })
+    .then(function (data){
+      console.log(data);
+      var price = data.price;
+      $('#price1').text(price);
+      $('#qtymore1').show();
+      $('#qtyless1').show();
+
+    })
+    // var z = ($( "#printer1" ).val());
+    // if(z==1)
+    //     {
+    //         var x = ($( "#material1" ).val());
+    //         var y = Number(val)+1;
+    //         console.log(x + "  " + y);
+    //         $("#price1").text(x*y);
+    //         $("#finalPrice1").val(x*y);
+    //       }
+    //     else
+    //     {
+    //         var x = ($( "#material21" ).val());
+    //         var y = Number(val+1);
+    //         $("#price1").text(x*y);
+    //         $("#finalPrice1").val(x*y);
+    //     }
+    //     finalval = Number(val)+1;
+    //     $("#quantity1").val(finalval);
+  });
+  
+  
+  
+  
+  
+  
+  $("#qtyless1").click(function(){
+    val = $("#qty1").val();
+    if(Number(val) > 1){
+      $("#qty1").val(Number(val)-1);
+      var id = $('#databaseId1').val();
+      console.log(val);
+      console.log(typeof val);
+      var newval = $("#qty1").val();
+      console.log(newval);
+      console.log(typeof newval);
+      var price = $('#price1').text();
+      price = Number(price) / Number(val);
+      var newprice = price * Number(newval);
+      console.log (newprice);
+      newprice = newprice.toString();
+      $('#price1').text(newprice);
+      $('#qtymore1').hide();
+      $('#qtyless1').hide();
+
+      var url = "https://whispering-springs-49161.herokuapp.com/uploadfile/decrease-quantity/" + id + "/" + newval;
+      fetch(url)
+      .then(function(res){
+        console.log(res);
+        return res.json()
+      })
+      .then(function (data){
+        console.log(data);
+        var price = data.price;
+        $('#price1').text(price);
+        $('#qtymore1').show();
+        $('#qtyless1').show();
+
+  
+      })
+    }
+    // var z = ($( "#printer1" ).val());
+    // if(z==1)
+    //     {
+    //         var x = ($( "#material1" ).val());
+    //         var y = Number(val)+1;
+    //         console.log(x + "  " + y);
+    //         $("#price1").text(x*y);
+    //         $("#finalPrice1").val(x*y);
+    //       }
+    //     else
+    //     {
+    //         var x = ($( "#material21" ).val());
+    //         var y = Number(val+1);
+    //         $("#price1").text(x*y);
+    //         $("#finalPrice1").val(x*y);
+    //     }
+    //     finalval = Number(val)+1;
+    //     $("#quantity1").val(finalval);
+  });
+
+
+
+
+
+// // for second instance
+//     $('#printer22').hide();
+    
+//     $( "#printer2" ).change(function(){
+//         $("#disablePT2").prop('disabled',true);
+//         var x = parseInt($( '#printer2' ).val());
+//         if(x==1)
+//         {
+//           var x = ($( "#material2" ).val());
+//           var y = ($( "#qty2" ).val());
+//           $("#price2").text(x*y);
+//           $('#finalPrice2').val(x*y);
+//           $('#printer22').hide();
+//           $('#printer12').show();
+//           $('#modifyVal2').show();
+//         }
+//         else
+//         {
+//           var x = ($( "#material22" ).val());
+//           var y = ($( "#qty2" ).val());
+//           $("#price2").text(x*y);
+//           $('#finalPrice2').val(x*y);
+//           $('#printer12').hide();
+//           $('#printer22').show();
+//           $('#modifyVal2').hide();
+//         }
+//         console.log(x);
+//     });
+
+
+
+
+//   // // for third instance
+//     $('#printer23').hide();
+    
+//     $( "#printer3" ).change(function(){
+//         $("#disablePT3").prop('disabled',true);
+//         var x = parseInt($( '#printer3' ).val());
+//         if(x==1)
+//         {
+//           var x = ($( "#material3" ).val());
+//           var y = ($( "#qty3" ).val());
+//           $("#price3").text(x*y);
+//           $('#finalPrice3').val(x*y);
+//           $('#printer23').hide();
+//           $('#printer13').show();
+//           $('#modifyVal3').show();
+//         }
+//         else
+//         {
+//           var x = ($( "#material23" ).val());
+//           var y = ($( "#qty3" ).val());
+//           $("#price3").text(x*y);
+//           $('#finalPrice3').val(x*y);
+//           $('#printer13').hide();
+//           $('#printer23').show();
+//           $('#modifyVal3').hide();
+//         }
+//         console.log(x);
+//     });
+
+
+
+//   // for fourth instance
+//     $('#printer24').hide();
+    
+//     $( "#printer4" ).change(function(){
+//         $("#disablePT4").prop('disabled',true);
+//         var x = parseInt($( '#printer4' ).val());
+//         if(x==1)
+//         {
+//           var x = ($( "#material4" ).val());
+//           var y = ($( "#qty4" ).val());
+//           $("#price4").text(x*y);
+//           $('#finalPrice4').val(x*y);
+//           $('#printer24').hide();
+//           $('#printer14').show();
+//           $('#modifyVal4').show();
+//         }
+//         else
+//         {
+//           var x = ($( "#material24" ).val());
+//           var y = ($( "#qty4" ).val());
+//           $("#price4").text(x*y);
+//           $('#finalPrice4').val(x*y);
+//           $('#printer14').hide();
+//           $('#printer24').show();
+//           $('#modifyVal4').hide();
+//         }
+//         console.log(x);
+//     });
+
+
+//   // for fifth instance
+//     $('#printer25').hide();
+    
+//     $( "#printer5" ).change(function(){
+//         $("#disablePT5").prop('disabled',true);
+//         var x = parseInt($( '#printer5' ).val());
+//         if(x==1)
+//         {
+//           var x = ($( "#material5" ).val());
+//           var y = ($( "#qty5" ).val());
+//           $("#price5").text(x*y);
+//           $('#finalPrice5').val(x*y);
+//           $('#printer25').hide();
+//           $('#printer15').show();
+//           $('#modifyVal5').show();
+//         }
+//         else
+//         {
+//           var x = ($( "#material25" ).val());
+//           var y = ($( "#qty5" ).val());
+//           $("#price5").text(x*y);
+//           $('#finalPrice5').val(x*y);
+//           $('#printer15').hide();
+//           $('#printer25').show();
+//           $('#modifyVal5').hide();
+//         }
+//         console.log(x);
+//     });
+
+
+
+
+
+
+
+
+//  for first instance
+  // $( "#material1" ).change(function(){
+  //   $("#disableMT1").prop('disabled',true);
+  //       var x = ($( "#material1" ).val());
+  //       var y = ($( "#qty1" ).val());
+  //       $("#price1").text(x*y);
+  //       $('#finalPrice1').val(x*y);
+  //       // $("#totalPrice1").val(x*y);
+  //       console.log(x*y);
+  // });
+  
+  // $( "#material21" ).change(function(){
+  //   $("#disableMT21").prop('disabled',true);
+  //       var x = ($( "#material21" ).val());
+  //       var y = ($( "#qty1" ).val());
+  //       $("#price1").text(x*y);
+  //       $('#finalPrice1').val(x*y);
+  //       // $("#totalPrice1").val(x*y);
+  //       console.log(x*y);
+  // });
+  
+  
+  
+// //  for second instance
+//   $( "#material2" ).change(function(){
+//     $("#disableMT2").prop('disabled',true);
+//         var x = ($( "#material2" ).val());
+//         var y = ($( "#qty2" ).val());
+//         $("#price2").text(x*y);
+//         $('#finalPrice2').val(x*y);
+//         // $("#totalPrice1").val(x*y);
+//         console.log(x*y);
+//   });
+  
+//   $( "#material22" ).change(function(){
+//     $("#disableMT22").prop('disabled',true);
+//         var x = ($( "#material22" ).val());
+//         var y = ($( "#qty2" ).val());
+//         $("#price2").text(x*y);
+//         $('#finalPrice2').val(x*y);
+//         // $("#totalPrice1").val(x*y);
+//         console.log(x*y);
+//   });
+  
+
+
+
+// //  for third instance
+//   $( "#material3" ).change(function(){
+//     $("#disableMT3").prop('disabled',true);
+//         var x = ($( "#material3" ).val());
+//         var y = ($( "#qty3" ).val());
+//         $("#price3").text(x*y);
+//         $('#finalPrice3').val(x*y);
+//         // $("#totalPrice1").val(x*y);
+//         console.log(x*y);
+//   });
+  
+//   $( "#material23" ).change(function(){
+//     $("#disableMT23").prop('disabled',true);
+//         var x = ($( "#material23" ).val());
+//         var y = ($( "#qty3" ).val());
+//         $("#price3").text(x*y);
+//         $('#finalPrice3').val(x*y);
+//         // $("#totalPrice1").val(x*y);
+//         console.log(x*y);
+//   });
+
+
+
+
+// //  for fourth instance
+//   $( "#material4" ).change(function(){
+//     $("#disableMT4").prop('disabled',true);
+//         var x = ($( "#material4" ).val());
+//         var y = ($( "#qty4" ).val());
+//         $("#price4").text(x*y);
+//         $('#finalPrice4').val(x*y);
+//         // $("#totalPrice1").val(x*y);
+//         console.log(x*y);
+//   });
+  
+//   $( "#material24" ).change(function(){
+//     $("#disableMT24").prop('disabled',true);
+//         var x = ($( "#material24" ).val());
+//         var y = ($( "#qty4" ).val());
+//         $("#price4").text(x*y);
+//         $('#finalPrice4').val(x*y);
+//         // $("#totalPrice1").val(x*y);
+//         console.log(x*y);
+//   });
+
+
+
+
+
+// //  for fifth instance
+//   $( "#material5" ).change(function(){
+//     $("#disableMT5").prop('disabled',true);
+//         var x = ($( "#material5" ).val());
+//         var y = ($( "#qty5" ).val());
+//         $("#price5").text(x*y);
+//         $('#finalPrice5').val(x*y);
+//         // $("#totalPrice1").val(x*y);
+//         console.log(x*y);
+//   });
+  
+//   $( "#material25" ).change(function(){
+//     $("#disableMT25").prop('disabled',true);
+//         var x = ($( "#material25" ).val());
+//         var y = ($( "#qty5" ).val());
+//         $("#price5").text(x*y);
+//         $('#finalPrice5').val(x*y);
+//         // $("#totalPrice1").val(x*y);
+//         console.log(x*y);
+//   });
+
+
+
+
+  
+  
+  //first instance
+  // $( "#layerHeight1" ).change(function(){
+  //   var lh = $( "#layerHeight1 option:selected" ).val();
+  //       $('#layerheighttocart1').val(lh);
+	 //     $("#disableLH1").prop('disabled',true);
+	      
+	 //     $( "#infill1" ).change(function(){
+	 //       var inf = $('#infill1 option:selected').val();
+	 //       $('#infilltocart1').val(inf);
+	 //       $("#disableIF1").prop('disabled',true);
+  //           $('#submit1').prop('style','display : block')
+	 //     });
+  // });
+     
+  // $( "#infill1" ).change(function(){
+  //   var inf = $('#infill1 option:selected').val();
+	 //       $('#infilltocart1').val(inf);
+	 //     $("#disableLH1").prop('disabled',true);
+	      
+	 //     $( "#layerHeight1" ).change(function(){
+	 //        var lh = $( "#layerHeight1 option:selected" ).val();
+  //       $('#layerheighttocart1').val(lh);
+	 //       $("#disableIF1").prop('disabled',true);
+  //           $('#submit1').prop('style','display : block')
+	 //     });
+  // });
+  
+  
+  
+  
+  // // second instance
+  // $( "#layerHeight2" ).change(function(){
+	 //     $("#disableLH2").prop('disabled',true);
+	      
+	 //     $( "#infill2" ).change(function(){
+	 //       $("#disableIF2").prop('disabled',true);
+  //           $('#submit2').prop('style','display : block')
+	 //     });
+  // });
+     
+  // $( "#infill2" ).change(function(){
+	 //     $("#disableLH2").prop('disabled',true);
+	      
+	 //     $( "#layerHeight2" ).change(function(){
+	 //       $("#disableIF2").prop('disabled',true);
+  //           $('#submit22').prop('style','display : block')
+	 //     });
+  // });
+  
+  
+  
+  // // third instance
+  // $( "#layerHeight3" ).change(function(){
+	 //     $("#disableLH3").prop('disabled',true);
+	      
+	 //     $( "#infill3" ).change(function(){
+	 //       $("#disableIF3").prop('disabled',true);
+  //           $('#submit3').prop('style','display : block')
+	 //     });
+  // });
+     
+  // $( "#infill3" ).change(function(){
+	 //     $("#disableLH3").prop('disabled',true);
+	      
+	 //     $( "#layerHeight3" ).change(function(){
+	 //       $("#disableIF3").prop('disabled',true);
+  //           $('#submit23').prop('style','display : block')
+	 //     });
+  // });
+
+
+
+  // // fourth instance
+  // $( "#layerHeight4" ).change(function(){
+	 //     $("#disableLH4").prop('disabled',true);
+	      
+	 //     $( "#infill4" ).change(function(){
+	 //       $("#disableIF4").prop('disabled',true);
+  //           $('#submit4').prop('style','display : block')
+	 //     });
+  // });
+     
+  // $( "#infill4" ).change(function(){
+	 //     $("#disableLH4").prop('disabled',true);
+	      
+	 //     $( "#layerHeight4" ).change(function(){
+	 //       $("#disableIF4").prop('disabled',true);
+  //           $('#submit24').prop('style','display : block')
+	 //     });
+  // });
+
+
+
+  // // fifth instance
+  // $( "#layerHeight5" ).change(function(){
+	 //     $("#disableLH5").prop('disabled',true);
+	      
+	 //     $( "#infill5" ).change(function(){
+	 //       $("#disableIF5").prop('disabled',true);
+  //           $('#submit5').prop('style','display : block')
+	 //     });
+  // });
+     
+  // $( "#infill5" ).change(function(){
+	 //     $("#disableLH5").prop('disabled',true);
+	      
+	 //     $( "#layerHeight5" ).change(function(){
+	 //       $("#disableIF5").prop('disabled',true);
+  //           $('#submit25').prop('style','display : block')
+	 //     });
+  // });
+
+  
+  
+
+  
+  
+  // $("#qtymore1").click(function(){
+  //   val = $("#qty1").val();
+  //   $("#qty1").val(Number(val)+1);
+  //   var z = ($( "#printer1" ).val());
+  //   if(z==1)
+  //       {
+  //           var x = ($( "#material1" ).val());
+  //           var y = Number(val)+1;
+  //           console.log(x + "  " + y);
+  //           $("#price1").text(x*y);
+  //           $("#finalPrice1").val(x*y);
+  //         }
+  //       else
+  //       {
+  //           var x = ($( "#material21" ).val());
+  //           var y = Number(val+1);
+  //           $("#price1").text(x*y);
+  //           $("#finalPrice1").val(x*y);
+  //       }
+  //       finalval = Number(val)+1;
+  //       $("#quantity1").val(finalval);
+  // });
+  
+  
+  // $("#qtyless1").click(function(){
+  //   val = $("#qty1").val();
+  //   if(Number(val)>1){
+  //     $("#qty1").val(Number(val)-1);
+  //   var z = ($( "#printer1" ).val());
+  //   if(z==1)
+  //       {
+  //           var x = ($( "#material1" ).val());
+  //           var y = Number(val)-1;
+  //           $("#price1").text(x*y);
+  //           $("#finalPrice1").val(x*y);
+  //         }
+  //       else
+  //       {
+  //           var x = ($( "#material21" ).val());
+  //           var y = Number(val)-1;
+  //           $("#price1").text(x*y);
+  //           $("#finalPrice1").val(x*y);
+  //       }
+  //   var q = val;
+  //   $('#Display1').val(q);
+  //   console.log($('#Display1').val());
+  //   }
+  //   else{
+  //     $('#qty1').val(1);
+  //   }
+  // });
+  
+  
+  
+  
+  
+  
+  
+  // // for second instance
+  // $("#qtymore2").click(function(){
+  //   val = $("#qty2").val();
+  //   $("#qty2").val(Number(val)+1);
+  //   var z = ($( "#printer2" ).val());
+  //   if(z==1)
+  //       {
+  //           var x = ($( "#material2" ).val());
+  //           var y = Number(val)+1;
+  //           console.log(x + "  " + y);
+  //           $("#price2").text(x*y);
+  //           $("#finalPrice2").val(x*y);
+  //         }
+  //       else
+  //       {
+  //           var x = ($( "#material22" ).val());
+  //           var y = Number(val+1);
+  //           $("#price2").text(x*y);
+  //           $("#finalPrice2").val(x*y);
+  //       }
+  //       finalval = Number(val)+1;
+  //       $("#quantity2").val(finalval);
+  // });
+  
+  
+  // $("#qtyless2").click(function(){
+  //   val = $("#qty2").val();
+  //   if(Number(val)>1){
+  //     $("#qty2").val(Number(val)-1);
+  //   var z = ($( "#printer2" ).val());
+  //   if(z==1)
+  //       {
+  //           var x = ($( "#material2" ).val());
+  //           var y = Number(val)-1;
+  //           $("#price2").text(x*y);
+  //           $("#finalPrice2").val(x*y);
+  //         }
+  //       else
+  //       {
+  //           var x = ($( "#material22" ).val());
+  //           var y = Number(val)-1;
+  //           $("#price2").text(x*y);
+  //           $("#finalPrice2").val(x*y);
+  //       }
+  //   var q = val;
+  //   $('#Display2').val(q);
+  //   console.log($('#Display2').val());
+  //   }
+  //   else{
+  //     $('#qty2').val(1);
+  //   }
+  // });
+  
+  
+  
+  
+  // // for third instance
+  // $("#qtymore3").click(function(){
+  //   val = $("#qty3").val();
+  //   $("#qty3").val(Number(val)+1);
+  //   var z = ($( "#printer3" ).val());
+  //   if(z==1)
+  //       {
+  //           var x = ($( "#material3" ).val());
+  //           var y = Number(val)+1;
+  //           console.log(x + "  " + y);
+  //           $("#price3").text(x*y);
+  //           $("#finalPrice3").val(x*y);
+  //         }
+  //       else
+  //       {
+  //           var x = ($( "#material23" ).val());
+  //           var y = Number(val+1);
+  //           $("#price3").text(x*y);
+  //           $("#finalPrice3").val(x*y);
+  //       }
+  //       finalval = Number(val)+1;
+  //       $("#quantity3").val(finalval);
+  // });
+  
+  
+  // $("#qtyless3").click(function(){
+  //   val = $("#qty3").val();
+  //   if(Number(val)>1){
+  //     $("#qty3").val(Number(val)-1);
+  //   var z = ($( "#printer3" ).val());
+  //   if(z==1)
+  //       {
+  //           var x = ($( "#material3" ).val());
+  //           var y = Number(val)-1;
+  //           $("#price3").text(x*y);
+  //           $("#finalPrice3").val(x*y);
+  //         }
+  //       else
+  //       {
+  //           var x = ($( "#material23" ).val());
+  //           var y = Number(val)-1;
+  //           $("#price3").text(x*y);
+  //           $("#finalPrice3").val(x*y);
+  //       }
+  //   var q = val;
+  //   $('#Display3').val(q);
+  //   console.log($('#Display3').val());
+  //   }
+  //   else{
+  //     $('#qty3').val(1);
+  //   }
+  // });
+  
+  
+  
+  
+  // // for fourth instance
+  // $("#qtymore4").click(function(){
+  //   val = $("#qty4").val();
+  //   $("#qty4").val(Number(val)+1);
+  //   var z = ($( "#printer4" ).val());
+  //   if(z==1)
+  //       {
+  //           var x = ($( "#material4" ).val());
+  //           var y = Number(val)+1;
+  //           console.log(x + "  " + y);
+  //           $("#price4").text(x*y);
+  //           $("#finalPrice4").val(x*y);
+  //         }
+  //       else
+  //       {
+  //           var x = ($( "#material24" ).val());
+  //           var y = Number(val+1);
+  //           $("#price4").text(x*y);
+  //           $("#finalPrice4").val(x*y);
+  //       }
+  //       finalval = Number(val)+1;
+  //       $("#quantity4").val(finalval);
+  // });
+  
+  
+  // $("#qtyless4").click(function(){
+  //   val = $("#qty4").val();
+  //   if(Number(val)>1){
+  //     $("#qty4").val(Number(val)-1);
+  //   var z = ($( "#printer4" ).val());
+  //   if(z==1)
+  //       {
+  //           var x = ($( "#material4" ).val());
+  //           var y = Number(val)-1;
+  //           $("#price4").text(x*y);
+  //           $("#finalPrice4").val(x*y);
+  //         }
+  //       else
+  //       {
+  //           var x = ($( "#material24" ).val());
+  //           var y = Number(val)-1;
+  //           $("#price4").text(x*y);
+  //           $("#finalPrice4").val(x*y);
+  //       }
+  //   var q = val;
+  //   $('#Display4').val(q);
+  //   console.log($('#Display4').val());
+  //   }
+  //   else{
+  //     $('#qty4').val(1);
+  //   }
+  // });
+  
+  
+  
+  
+  
+  // // for fifth instance
+  // $("#qtymore5").click(function(){
+  //   val = $("#qty5").val();
+  //   $("#qty5").val(Number(val)+1);
+  //   var z = ($( "#printer5" ).val());
+  //   if(z==1)
+  //       {
+  //           var x = ($( "#material5" ).val());
+  //           var y = Number(val)+1;
+  //           console.log(x + "  " + y);
+  //           $("#price5").text(x*y);
+  //           $("#finalPrice5").val(x*y);
+  //         }
+  //       else
+  //       {
+  //           var x = ($( "#material25" ).val());
+  //           var y = Number(val+1);
+  //           $("#price5").text(x*y);
+  //           $("#finalPrice5").val(x*y);
+  //       }
+  //       finalval = Number(val)+1;
+  //       $("#quantity5").val(finalval);
+  // });
+  
+  
+  // $("#qtyless5").click(function(){
+  //   val = $("#qty5").val();
+  //   if(Number(val)>1){
+  //     $("#qty5").val(Number(val)-1);
+  //   var z = ($( "#printer5" ).val());
+  //   if(z==1)
+  //       {
+  //           var x = ($( "#material5" ).val());
+  //           var y = Number(val)-1;
+  //           $("#price5").text(x*y);
+  //           $("#finalPrice5").val(x*y);
+  //         }
+  //       else
+  //       {
+  //           var x = ($( "#material25" ).val());
+  //           var y = Number(val)-1;
+  //           $("#price5").text(x*y);
+  //           $("#finalPrice5").val(x*y);
+  //       }
+  //   var q = val;
+  //   $('#Display5').val(q);
+  //   console.log($('#Display5').val());
+  //   }
+  //   else{
+  //     $('#qty5').val(1);
+  //   }
+  // });
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  // $("#qty1").change(function(){
+  //   val = $("#qty1").val();
+  //   numval = Number(val);
+    
+  // })
+  
+  
+  
+  
+  
+  // $('.qty-input i').on('click',function() {
+		// val = parseInt($('.qty-input input').val());
+    
+		// if ($(this).hasClass('less')) {
+		// 		val = val - 1;
+		// } else if ($(this).hasClass('more')) {
+		// 		val = val + 1;
+		// }
+		// if(val < 1) {
+		// 		val = 1;
+		// }
+		// $('.qty-input input').val(val);
+		
+  //   var z = ($( "#printer" ).val());
+  //   if(z==1)
+  //       {
+  //           var x = ($( "#material" ).val());
+  //           var y = Number(val);
+  //           console.log(x + "  " + y);
+  //           $("#price").text(x*y);
+  //           $("#totalPrice").val(x*y);
+  //       }
+  //       else
+  //       {
+  //           var x = ($( "#material2" ).val());
+  //           var y = Number(val);
+  //           console.log(x + "  " + y);
+  //           $("#price").text(x*y);
+  //           $("#totalPrice").val(x*y);
+  //       }
+    
+    
+    
+  //   var q = val;
+  //   $('#Display').val(q);
+  //   console.log($('#Display').val());
+  // });
+  
+  
+  </script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<html>
+    <head>
+        
+    </head>
+    <body>
+        <h3>
+    admin panel
+    <hr>
+</h3>
+<div style="font-size: 13px; margin-top: 5px;">
+    <% revobj.forEach(function(data){ %>
+        <p style="font-size: 13px; margin-top: 5px; margin-bottom: 5px;">payment status: <%=data.status%></p>
+        <p style="font-size: 13px; margin-top: 5px; margin-bottom: 5px;">payment id    : <%=data.paymentId%></p>
+        <p style="font-size: 13px; margin-top: 5px; margin-bottom: 5px;">product name  : <%=data.productname%></p>
+        <p style="font-size: 13px; margin-top: 5px; margin-bottom: 5px;">layer height  : <%=data.layerheight%></p>
+        <p style="font-size: 13px; margin-top: 5px; margin-bottom: 5px;">infill        : <%=data.infill%></p>
+        <p style="font-size: 13px; margin-top: 5px; margin-bottom: 5px;">amount        : <%=data.amount%></p>
+        <p style="font-size: 13px; margin-top: 5px; margin-bottom: 5px;">quantity      : <%=data.quantity%></p>
+        <p style="font-size: 13px; margin-top: 5px; margin-bottom: 5px;">email id      : <%=data.emailId%></p>
+        <hr>
+    <% }); %>
+</div>
+    </body>
+</html>
