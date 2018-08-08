@@ -24,7 +24,7 @@ var nodemailer                     = require("nodemailer");
 // var LocalStrategy               = require ("passport-local");
 // var passportLocalMongoose       = require("passport-local-mongoose");
 // var adminroutes                 = require("./config/adminpanel.js");
-
+var keys                           = require ("./config/keys.js")
 
 // set view engine
 app.set('view engine', 'ejs');
@@ -178,8 +178,8 @@ passport.deserializeUser((id, done) => {
 
 // passport middleware
 passport.use(new GoogleStrategy({
-    clientID: '843006764440-oi2bchr14s0dvcdugtdfbfhctmmmkgh6.apps.googleusercontent.com',
-    clientSecret: 'VJOBzAzaodOwWlqpDvyH3Qce',
+    clientID: keys.google.clientID,
+    clientSecret: keys.google.clientSecret,
     callbackURL: "https://stormy-plains-23195.herokuapp.com/auth/google/redirect"
   }, (accessToken, refreshToken, profile, done) => {
       //console.log(refreshToken);
@@ -230,8 +230,8 @@ passport.use(new GoogleStrategy({
 
 
 let rzp = new Razorpay({
-  key_id: 'rzp_test_2ZhVhf0meouzDo', // your `KEY_ID`
-  key_secret: 'dBKHC7ZWSzapnbS0Sm2kK8vs' // your `KEY_SECRET`
+  key_id: keys.razorpay.keyid, // your `KEY_ID`
+  key_secret: keys.razorpay.keysecret // your `KEY_SECRET`
 })
 
 
