@@ -84,7 +84,7 @@
     </div>
     
     <div class="col-lg-4 col-md-4 addBackgroundColor" style="border-right: 1px solid darkgray; height:298px;">
-        <h5 style="margin-top:10px;"><%=data.fileName%></h5>
+        <h5 style="margin-top:10px;" id = "modelnametext<%=counter.toString();%>" ><%=data.fileName%></h5>
         <div style="margin-top:5px;">
             <select class="custom-select" id="printer<%=counter.toString();%>">
               <!--<option value="1" default id="disablePT<%=counter.toString();%>" >Printer (default-FDM Printer)</option>-->
@@ -155,13 +155,13 @@
               <input type="text" name="fileName" value="<%=data.fileName%>" style="display : none"/>
             </select>
         </div>
-      
+      <h3 id = 'processing<%=counter.toString();%>'></h3>
       <form action="/modify/<%=data._id%>" method="POST" name="<%=data._id%>" id="modifyVal<%=counter.toString()%>">
         <input id = "modifyfilename<%=counter.toString()%>" type="text" name="fileName" value="<%=data.fileName%>" style="display : none"/>
         <input id = "databaseId<%=counter.toString()%>" type="text" name="=databaseId" value="<%=data._id%>" style="display : none"/>
         <div class="row">
           <div class="col-lg-5 col-md-5" >
-            <label class="mr-sm-2" for="inlineFormCustomSelect"><p style="font-size:16px;">Layer Height</p></label>
+            <label class="mr-sm-2" for="inlineFormCustomSelect"><p style="font-size:16px;" id ='layerHeightText<%=counter.toString()%>'>Layer Height</p></label>
           </div>
           <div class="col-lg-7 col-md-7" >
           <select class="custom-select mr-sm-2" name="height" id="layerHeight<%=counter.toString()%>" >
@@ -175,7 +175,7 @@
         </div>
           <div class="row">
             <div class="col-lg-5 col-md-5">
-              <label class="mr-sm-2" for="inlineFormCustomSelect"><p style="font-size:16px;">Infill</p></label>
+              <label class="mr-sm-2" for="inlineFormCustomSelect"><p style="font-size:16px;" id = "infillText<%=counter.toString()%>" >Infill Percentage</p></label>
             </div>
             <div class="col-lg-7 col-md-7">
             <select class="custom-select mr-sm-2" id="infill<%=counter.toString()%>" name='infill'>
@@ -199,7 +199,7 @@
           </div>
           <div class="qty-input">
             <i id="qtyless<%=counter.toString()%>" class="less">-</i>
-              <input id="qty<%=counter.toString()%>" type="text" value="1"/>
+              <input id="qty<%=counter.toString()%>" type="text" value="1" disabled/>
             <i id="qtymore<%=counter.toString()%>" class="more">+</i>
           </div>
         </div> 
@@ -234,6 +234,16 @@
 $( "#layerHeight1" ).change(function(){
   var lh = $( "#layerHeight1 option:selected" ).val();
   // console.log(lh);
+  $('#printer1').hide();
+  $('#material1').hide();
+  $('#layerHeight1').hide();
+  $('#infill1').hide();
+  $('#layerHeightText1').text("");
+  $('#infillText1').text("");
+  $('#modelnametext1').text("");
+  $('#qtymore1').hide();
+  $('#qtyless1').hide();
+  $('#processing1').text("Processing");
   var name = $('#modifyfilename1').val();
   var id = $('#databaseId1').val();
   // console.log(name);
@@ -255,7 +265,7 @@ $( "#layerHeight1" ).change(function(){
   var material =  $( "#material1 option:selected" ).val();
   console.log (material);
   console.log(typeof material);
-  var url = "https://whispering-springs-49161.herokuapp.com/uploadfile/modify-layer-height/" + lh + "/" + inf + "/" + name + "/" + id + "/" + material;
+  var url = "https://sadfdf-swastik0310.c9users.io/uploadfile/modify-layer-height/" + lh + "/" + inf + "/" + name + "/" + id + "/" + material;
   fetch(url)
   .then(function(res){
     console.log(res);
@@ -264,6 +274,16 @@ $( "#layerHeight1" ).change(function(){
   .then(function (data){
     console.log(data);
     var price = data.price;
+    $('#printer1').show();
+    $('#material1').show();
+    $('#layerHeight1').show();
+    $('#infill1').show();
+    $('#layerHeightText1').text("Layer Height");
+    $('#infillText1').text("Infill Percentage");
+    $('#modelnametext1').text(name);
+    $('#qtymore1').show();
+    $('#qtyless1').show();
+    $('#processing1').text("");
     $('#price1').text(price);
   })
 });
@@ -274,6 +294,16 @@ $( "#layerHeight1" ).change(function(){
 // on infill change first instance
 $( "#infill1" ).change(function(){
   var lh = $( "#layerHeight1 option:selected" ).val();
+  $('#printer1').hide();
+  $('#material1').hide();
+  $('#layerHeight1').hide();
+  $('#infill1').hide();
+  $('#layerHeightText1').text("");
+  $('#infillText1').text("");
+  $('#modelnametext1').text("");
+  $('#qtymore1').hide();
+  $('#qtyless1').hide();
+  $('#processing1').text("Processing");
   // console.log(lh);
   var name = $('#modifyfilename1').val();
   var id = $('#databaseId1').val();
@@ -293,7 +323,7 @@ $( "#infill1" ).change(function(){
     console.log (material);
     console.log(typeof material);
   }
-  var url = "https://whispering-springs-49161.herokuapp.com/uploadfile/modify-infill-percentage/" + inf + "/" + lh + "/" + name + "/" + id + "/" + material;
+  var url = "https://sadfdf-swastik0310.c9users.io/uploadfile/modify-infill-percentage/" + inf + "/" + lh + "/" + name + "/" + id + "/" + material;
   fetch(url)
   .then(function(res){
     console.log(res);
@@ -302,6 +332,16 @@ $( "#infill1" ).change(function(){
   .then(function (data){
     console.log(data);
     var price = data.price;
+    $('#printer1').show();
+    $('#material1').show();
+    $('#layerHeight1').show();
+    $('#infill1').show();
+    $('#layerHeightText1').text("Layer Height");
+    $('#infillText1').text("Infill Percentage");
+    $('#modelnametext1').text(name);
+    $('#qtymore1').show();
+    $('#qtyless1').show();
+    $('#processing1').text("");
     $('#price1').text(price);
   })
 });
@@ -319,7 +359,7 @@ $( "#infill1" ).change(function(){
       var printerId = $( '#printer1' ).val();
       console.log(printerId);
       console.log (typeof printerId);
-      var url = "https://whispering-springs-49161.herokuapp.com/uploadfile/change-printer/" + id + "/" + printerId;
+      var url = "https://sadfdf-swastik0310.c9users.io/uploadfile/change-printer/" + id + "/" + printerId;
       fetch(url)
     .then(function(res){
         console.log(res);
@@ -353,20 +393,40 @@ $( "#infill1" ).change(function(){
 //  material FDM change first instance
   $( "#material1" ).change(function(){
   //   $("#disableMT1").prop('disabled',true);
-        var id = $('#databaseId1').val();
-        var material = ($( "#material1" ).val());
-        var printerId = $( '#printer1' ).val();
-        var url = "https://whispering-springs-49161.herokuapp.com/uploadfile/change-material/" + id + "/" + printerId + "/" + material;
-        fetch(url)
-        .then(function(res){
-          console.log(res);
-          return res.json()
-        })
-        .then(function (data){
-          console.log(data);
-          var price = data.price;
-          $('#price1').text(price);
-        })
+  $('#printer1').hide();
+  $('#material1').hide();
+  $('#layerHeight1').hide();
+  $('#infill1').hide();
+  $('#layerHeightText1').text("");
+  $('#infillText1').text("");
+  $('#modelnametext1').text("");
+  $('#qtymore1').hide();
+  $('#qtyless1').hide();
+  $('#processing1').text("Processing");
+  var id = $('#databaseId1').val();
+  var material = ($( "#material1" ).val());
+  var printerId = $( '#printer1' ).val();
+  var url = "https://sadfdf-swastik0310.c9users.io/uploadfile/change-material/" + id + "/" + printerId + "/" + material;
+  fetch(url)
+  .then(function(res){
+    console.log(res);
+    return res.json()
+  })
+  .then(function (data){
+    console.log(data);
+    var price = data.price;
+    $('#printer1').show();
+    $('#material1').show();
+    $('#layerHeight1').show();
+    $('#infill1').show();
+    $('#layerHeightText1').text("Layer Height");
+    $('#infillText1').text("Infill Percentage");
+    $('#modelnametext1').text(name);
+    $('#qtymore1').show();
+    $('#qtyless1').show();
+    $('#processing1').text("");
+    $('#price1').text(price);
+  })
 
   });
 
@@ -375,21 +435,30 @@ $( "#infill1" ).change(function(){
 //  material sla change first instance
   $( "#material21" ).change(function(){
   //   $("#disableMT1").prop('disabled',true);
-        var id = $('#databaseId1').val();
-        var material = ($( "#material21" ).val());
-        var printerId = $( '#printer1').val();
-        var url = "https://whispering-springs-49161.herokuapp.com/uploadfile/change-material/" + id + "/" + printerId + "/" + material;
-        fetch(url)
-        .then(function(res){
-          console.log(res);
-          return res.json()
-        })
-        .then(function (data){
-          console.log(data);
-          var price = data.price;
-          $('#price1').text(price);
-        })
-
+    $('#printer1').hide();
+    $('#material21').hide();
+    $('#processing1').text("Processing");
+    $('#qtymore1').hide();
+    $('#qtyless1').hide();
+    var id = $('#databaseId1').val();
+    var material = ($( "#material21" ).val());
+    var printerId = $( '#printer1').val();
+    var url = "https://sadfdf-swastik0310.c9users.io/uploadfile/change-material/" + id + "/" + printerId + "/" + material;
+    fetch(url)
+    .then(function(res){
+      console.log(res);
+      return res.json()
+    })
+    .then(function (data){
+      console.log(data);
+      var price = data.price;
+      $('#printer1').show();
+      $('#material21').show();
+      $('#processing1').text("");
+      $('#qtymore1').show();
+      $('#qtyless1').show();
+      $('#price1').text(price);
+    })
   });
 
 
@@ -415,7 +484,7 @@ $( "#infill1" ).change(function(){
     $('#qtymore1').hide();
     $('#qtyless1').hide();
 
-    var url = "https://whispering-springs-49161.herokuapp.com/uploadfile/increase-quantity/" + id + "/" + newval;
+    var url = "https://sadfdf-swastik0310.c9users.io/uploadfile/increase-quantity/" + id + "/" + newval;
     fetch(url)
     .then(function(res){
       console.log(res);
@@ -429,24 +498,6 @@ $( "#infill1" ).change(function(){
       $('#qtyless1').show();
 
     })
-    // var z = ($( "#printer1" ).val());
-    // if(z==1)
-    //     {
-    //         var x = ($( "#material1" ).val());
-    //         var y = Number(val)+1;
-    //         console.log(x + "  " + y);
-    //         $("#price1").text(x*y);
-    //         $("#finalPrice1").val(x*y);
-    //       }
-    //     else
-    //     {
-    //         var x = ($( "#material21" ).val());
-    //         var y = Number(val+1);
-    //         $("#price1").text(x*y);
-    //         $("#finalPrice1").val(x*y);
-    //     }
-    //     finalval = Number(val)+1;
-    //     $("#quantity1").val(finalval);
   });
   
   
@@ -473,7 +524,7 @@ $( "#infill1" ).change(function(){
       $('#qtymore1').hide();
       $('#qtyless1').hide();
 
-      var url = "https://whispering-springs-49161.herokuapp.com/uploadfile/decrease-quantity/" + id + "/" + newval;
+      var url = "https://sadfdf-swastik0310.c9users.io/uploadfile/decrease-quantity/" + id + "/" + newval;
       fetch(url)
       .then(function(res){
         console.log(res);
@@ -489,747 +540,13 @@ $( "#infill1" ).change(function(){
   
       })
     }
-    // var z = ($( "#printer1" ).val());
-    // if(z==1)
-    //     {
-    //         var x = ($( "#material1" ).val());
-    //         var y = Number(val)+1;
-    //         console.log(x + "  " + y);
-    //         $("#price1").text(x*y);
-    //         $("#finalPrice1").val(x*y);
-    //       }
-    //     else
-    //     {
-    //         var x = ($( "#material21" ).val());
-    //         var y = Number(val+1);
-    //         $("#price1").text(x*y);
-    //         $("#finalPrice1").val(x*y);
-    //     }
-    //     finalval = Number(val)+1;
-    //     $("#quantity1").val(finalval);
   });
 
 
 
 
 
-// // for second instance
-//     $('#printer22').hide();
-    
-//     $( "#printer2" ).change(function(){
-//         $("#disablePT2").prop('disabled',true);
-//         var x = parseInt($( '#printer2' ).val());
-//         if(x==1)
-//         {
-//           var x = ($( "#material2" ).val());
-//           var y = ($( "#qty2" ).val());
-//           $("#price2").text(x*y);
-//           $('#finalPrice2').val(x*y);
-//           $('#printer22').hide();
-//           $('#printer12').show();
-//           $('#modifyVal2').show();
-//         }
-//         else
-//         {
-//           var x = ($( "#material22" ).val());
-//           var y = ($( "#qty2" ).val());
-//           $("#price2").text(x*y);
-//           $('#finalPrice2').val(x*y);
-//           $('#printer12').hide();
-//           $('#printer22').show();
-//           $('#modifyVal2').hide();
-//         }
-//         console.log(x);
-//     });
 
-
-
-
-//   // // for third instance
-//     $('#printer23').hide();
-    
-//     $( "#printer3" ).change(function(){
-//         $("#disablePT3").prop('disabled',true);
-//         var x = parseInt($( '#printer3' ).val());
-//         if(x==1)
-//         {
-//           var x = ($( "#material3" ).val());
-//           var y = ($( "#qty3" ).val());
-//           $("#price3").text(x*y);
-//           $('#finalPrice3').val(x*y);
-//           $('#printer23').hide();
-//           $('#printer13').show();
-//           $('#modifyVal3').show();
-//         }
-//         else
-//         {
-//           var x = ($( "#material23" ).val());
-//           var y = ($( "#qty3" ).val());
-//           $("#price3").text(x*y);
-//           $('#finalPrice3').val(x*y);
-//           $('#printer13').hide();
-//           $('#printer23').show();
-//           $('#modifyVal3').hide();
-//         }
-//         console.log(x);
-//     });
-
-
-
-//   // for fourth instance
-//     $('#printer24').hide();
-    
-//     $( "#printer4" ).change(function(){
-//         $("#disablePT4").prop('disabled',true);
-//         var x = parseInt($( '#printer4' ).val());
-//         if(x==1)
-//         {
-//           var x = ($( "#material4" ).val());
-//           var y = ($( "#qty4" ).val());
-//           $("#price4").text(x*y);
-//           $('#finalPrice4').val(x*y);
-//           $('#printer24').hide();
-//           $('#printer14').show();
-//           $('#modifyVal4').show();
-//         }
-//         else
-//         {
-//           var x = ($( "#material24" ).val());
-//           var y = ($( "#qty4" ).val());
-//           $("#price4").text(x*y);
-//           $('#finalPrice4').val(x*y);
-//           $('#printer14').hide();
-//           $('#printer24').show();
-//           $('#modifyVal4').hide();
-//         }
-//         console.log(x);
-//     });
-
-
-//   // for fifth instance
-//     $('#printer25').hide();
-    
-//     $( "#printer5" ).change(function(){
-//         $("#disablePT5").prop('disabled',true);
-//         var x = parseInt($( '#printer5' ).val());
-//         if(x==1)
-//         {
-//           var x = ($( "#material5" ).val());
-//           var y = ($( "#qty5" ).val());
-//           $("#price5").text(x*y);
-//           $('#finalPrice5').val(x*y);
-//           $('#printer25').hide();
-//           $('#printer15').show();
-//           $('#modifyVal5').show();
-//         }
-//         else
-//         {
-//           var x = ($( "#material25" ).val());
-//           var y = ($( "#qty5" ).val());
-//           $("#price5").text(x*y);
-//           $('#finalPrice5').val(x*y);
-//           $('#printer15').hide();
-//           $('#printer25').show();
-//           $('#modifyVal5').hide();
-//         }
-//         console.log(x);
-//     });
-
-
-
-
-
-
-
-
-//  for first instance
-  // $( "#material1" ).change(function(){
-  //   $("#disableMT1").prop('disabled',true);
-  //       var x = ($( "#material1" ).val());
-  //       var y = ($( "#qty1" ).val());
-  //       $("#price1").text(x*y);
-  //       $('#finalPrice1').val(x*y);
-  //       // $("#totalPrice1").val(x*y);
-  //       console.log(x*y);
-  // });
-  
-  // $( "#material21" ).change(function(){
-  //   $("#disableMT21").prop('disabled',true);
-  //       var x = ($( "#material21" ).val());
-  //       var y = ($( "#qty1" ).val());
-  //       $("#price1").text(x*y);
-  //       $('#finalPrice1').val(x*y);
-  //       // $("#totalPrice1").val(x*y);
-  //       console.log(x*y);
-  // });
-  
-  
-  
-// //  for second instance
-//   $( "#material2" ).change(function(){
-//     $("#disableMT2").prop('disabled',true);
-//         var x = ($( "#material2" ).val());
-//         var y = ($( "#qty2" ).val());
-//         $("#price2").text(x*y);
-//         $('#finalPrice2').val(x*y);
-//         // $("#totalPrice1").val(x*y);
-//         console.log(x*y);
-//   });
-  
-//   $( "#material22" ).change(function(){
-//     $("#disableMT22").prop('disabled',true);
-//         var x = ($( "#material22" ).val());
-//         var y = ($( "#qty2" ).val());
-//         $("#price2").text(x*y);
-//         $('#finalPrice2').val(x*y);
-//         // $("#totalPrice1").val(x*y);
-//         console.log(x*y);
-//   });
-  
-
-
-
-// //  for third instance
-//   $( "#material3" ).change(function(){
-//     $("#disableMT3").prop('disabled',true);
-//         var x = ($( "#material3" ).val());
-//         var y = ($( "#qty3" ).val());
-//         $("#price3").text(x*y);
-//         $('#finalPrice3').val(x*y);
-//         // $("#totalPrice1").val(x*y);
-//         console.log(x*y);
-//   });
-  
-//   $( "#material23" ).change(function(){
-//     $("#disableMT23").prop('disabled',true);
-//         var x = ($( "#material23" ).val());
-//         var y = ($( "#qty3" ).val());
-//         $("#price3").text(x*y);
-//         $('#finalPrice3').val(x*y);
-//         // $("#totalPrice1").val(x*y);
-//         console.log(x*y);
-//   });
-
-
-
-
-// //  for fourth instance
-//   $( "#material4" ).change(function(){
-//     $("#disableMT4").prop('disabled',true);
-//         var x = ($( "#material4" ).val());
-//         var y = ($( "#qty4" ).val());
-//         $("#price4").text(x*y);
-//         $('#finalPrice4').val(x*y);
-//         // $("#totalPrice1").val(x*y);
-//         console.log(x*y);
-//   });
-  
-//   $( "#material24" ).change(function(){
-//     $("#disableMT24").prop('disabled',true);
-//         var x = ($( "#material24" ).val());
-//         var y = ($( "#qty4" ).val());
-//         $("#price4").text(x*y);
-//         $('#finalPrice4').val(x*y);
-//         // $("#totalPrice1").val(x*y);
-//         console.log(x*y);
-//   });
-
-
-
-
-
-// //  for fifth instance
-//   $( "#material5" ).change(function(){
-//     $("#disableMT5").prop('disabled',true);
-//         var x = ($( "#material5" ).val());
-//         var y = ($( "#qty5" ).val());
-//         $("#price5").text(x*y);
-//         $('#finalPrice5').val(x*y);
-//         // $("#totalPrice1").val(x*y);
-//         console.log(x*y);
-//   });
-  
-//   $( "#material25" ).change(function(){
-//     $("#disableMT25").prop('disabled',true);
-//         var x = ($( "#material25" ).val());
-//         var y = ($( "#qty5" ).val());
-//         $("#price5").text(x*y);
-//         $('#finalPrice5').val(x*y);
-//         // $("#totalPrice1").val(x*y);
-//         console.log(x*y);
-//   });
-
-
-
-
-  
-  
-  //first instance
-  // $( "#layerHeight1" ).change(function(){
-  //   var lh = $( "#layerHeight1 option:selected" ).val();
-  //       $('#layerheighttocart1').val(lh);
-	 //     $("#disableLH1").prop('disabled',true);
-	      
-	 //     $( "#infill1" ).change(function(){
-	 //       var inf = $('#infill1 option:selected').val();
-	 //       $('#infilltocart1').val(inf);
-	 //       $("#disableIF1").prop('disabled',true);
-  //           $('#submit1').prop('style','display : block')
-	 //     });
-  // });
-     
-  // $( "#infill1" ).change(function(){
-  //   var inf = $('#infill1 option:selected').val();
-	 //       $('#infilltocart1').val(inf);
-	 //     $("#disableLH1").prop('disabled',true);
-	      
-	 //     $( "#layerHeight1" ).change(function(){
-	 //        var lh = $( "#layerHeight1 option:selected" ).val();
-  //       $('#layerheighttocart1').val(lh);
-	 //       $("#disableIF1").prop('disabled',true);
-  //           $('#submit1').prop('style','display : block')
-	 //     });
-  // });
-  
-  
-  
-  
-  // // second instance
-  // $( "#layerHeight2" ).change(function(){
-	 //     $("#disableLH2").prop('disabled',true);
-	      
-	 //     $( "#infill2" ).change(function(){
-	 //       $("#disableIF2").prop('disabled',true);
-  //           $('#submit2').prop('style','display : block')
-	 //     });
-  // });
-     
-  // $( "#infill2" ).change(function(){
-	 //     $("#disableLH2").prop('disabled',true);
-	      
-	 //     $( "#layerHeight2" ).change(function(){
-	 //       $("#disableIF2").prop('disabled',true);
-  //           $('#submit22').prop('style','display : block')
-	 //     });
-  // });
-  
-  
-  
-  // // third instance
-  // $( "#layerHeight3" ).change(function(){
-	 //     $("#disableLH3").prop('disabled',true);
-	      
-	 //     $( "#infill3" ).change(function(){
-	 //       $("#disableIF3").prop('disabled',true);
-  //           $('#submit3').prop('style','display : block')
-	 //     });
-  // });
-     
-  // $( "#infill3" ).change(function(){
-	 //     $("#disableLH3").prop('disabled',true);
-	      
-	 //     $( "#layerHeight3" ).change(function(){
-	 //       $("#disableIF3").prop('disabled',true);
-  //           $('#submit23').prop('style','display : block')
-	 //     });
-  // });
-
-
-
-  // // fourth instance
-  // $( "#layerHeight4" ).change(function(){
-	 //     $("#disableLH4").prop('disabled',true);
-	      
-	 //     $( "#infill4" ).change(function(){
-	 //       $("#disableIF4").prop('disabled',true);
-  //           $('#submit4').prop('style','display : block')
-	 //     });
-  // });
-     
-  // $( "#infill4" ).change(function(){
-	 //     $("#disableLH4").prop('disabled',true);
-	      
-	 //     $( "#layerHeight4" ).change(function(){
-	 //       $("#disableIF4").prop('disabled',true);
-  //           $('#submit24').prop('style','display : block')
-	 //     });
-  // });
-
-
-
-  // // fifth instance
-  // $( "#layerHeight5" ).change(function(){
-	 //     $("#disableLH5").prop('disabled',true);
-	      
-	 //     $( "#infill5" ).change(function(){
-	 //       $("#disableIF5").prop('disabled',true);
-  //           $('#submit5').prop('style','display : block')
-	 //     });
-  // });
-     
-  // $( "#infill5" ).change(function(){
-	 //     $("#disableLH5").prop('disabled',true);
-	      
-	 //     $( "#layerHeight5" ).change(function(){
-	 //       $("#disableIF5").prop('disabled',true);
-  //           $('#submit25').prop('style','display : block')
-	 //     });
-  // });
-
-  
-  
-
-  
-  
-  // $("#qtymore1").click(function(){
-  //   val = $("#qty1").val();
-  //   $("#qty1").val(Number(val)+1);
-  //   var z = ($( "#printer1" ).val());
-  //   if(z==1)
-  //       {
-  //           var x = ($( "#material1" ).val());
-  //           var y = Number(val)+1;
-  //           console.log(x + "  " + y);
-  //           $("#price1").text(x*y);
-  //           $("#finalPrice1").val(x*y);
-  //         }
-  //       else
-  //       {
-  //           var x = ($( "#material21" ).val());
-  //           var y = Number(val+1);
-  //           $("#price1").text(x*y);
-  //           $("#finalPrice1").val(x*y);
-  //       }
-  //       finalval = Number(val)+1;
-  //       $("#quantity1").val(finalval);
-  // });
-  
-  
-  // $("#qtyless1").click(function(){
-  //   val = $("#qty1").val();
-  //   if(Number(val)>1){
-  //     $("#qty1").val(Number(val)-1);
-  //   var z = ($( "#printer1" ).val());
-  //   if(z==1)
-  //       {
-  //           var x = ($( "#material1" ).val());
-  //           var y = Number(val)-1;
-  //           $("#price1").text(x*y);
-  //           $("#finalPrice1").val(x*y);
-  //         }
-  //       else
-  //       {
-  //           var x = ($( "#material21" ).val());
-  //           var y = Number(val)-1;
-  //           $("#price1").text(x*y);
-  //           $("#finalPrice1").val(x*y);
-  //       }
-  //   var q = val;
-  //   $('#Display1').val(q);
-  //   console.log($('#Display1').val());
-  //   }
-  //   else{
-  //     $('#qty1').val(1);
-  //   }
-  // });
-  
-  
-  
-  
-  
-  
-  
-  // // for second instance
-  // $("#qtymore2").click(function(){
-  //   val = $("#qty2").val();
-  //   $("#qty2").val(Number(val)+1);
-  //   var z = ($( "#printer2" ).val());
-  //   if(z==1)
-  //       {
-  //           var x = ($( "#material2" ).val());
-  //           var y = Number(val)+1;
-  //           console.log(x + "  " + y);
-  //           $("#price2").text(x*y);
-  //           $("#finalPrice2").val(x*y);
-  //         }
-  //       else
-  //       {
-  //           var x = ($( "#material22" ).val());
-  //           var y = Number(val+1);
-  //           $("#price2").text(x*y);
-  //           $("#finalPrice2").val(x*y);
-  //       }
-  //       finalval = Number(val)+1;
-  //       $("#quantity2").val(finalval);
-  // });
-  
-  
-  // $("#qtyless2").click(function(){
-  //   val = $("#qty2").val();
-  //   if(Number(val)>1){
-  //     $("#qty2").val(Number(val)-1);
-  //   var z = ($( "#printer2" ).val());
-  //   if(z==1)
-  //       {
-  //           var x = ($( "#material2" ).val());
-  //           var y = Number(val)-1;
-  //           $("#price2").text(x*y);
-  //           $("#finalPrice2").val(x*y);
-  //         }
-  //       else
-  //       {
-  //           var x = ($( "#material22" ).val());
-  //           var y = Number(val)-1;
-  //           $("#price2").text(x*y);
-  //           $("#finalPrice2").val(x*y);
-  //       }
-  //   var q = val;
-  //   $('#Display2').val(q);
-  //   console.log($('#Display2').val());
-  //   }
-  //   else{
-  //     $('#qty2').val(1);
-  //   }
-  // });
-  
-  
-  
-  
-  // // for third instance
-  // $("#qtymore3").click(function(){
-  //   val = $("#qty3").val();
-  //   $("#qty3").val(Number(val)+1);
-  //   var z = ($( "#printer3" ).val());
-  //   if(z==1)
-  //       {
-  //           var x = ($( "#material3" ).val());
-  //           var y = Number(val)+1;
-  //           console.log(x + "  " + y);
-  //           $("#price3").text(x*y);
-  //           $("#finalPrice3").val(x*y);
-  //         }
-  //       else
-  //       {
-  //           var x = ($( "#material23" ).val());
-  //           var y = Number(val+1);
-  //           $("#price3").text(x*y);
-  //           $("#finalPrice3").val(x*y);
-  //       }
-  //       finalval = Number(val)+1;
-  //       $("#quantity3").val(finalval);
-  // });
-  
-  
-  // $("#qtyless3").click(function(){
-  //   val = $("#qty3").val();
-  //   if(Number(val)>1){
-  //     $("#qty3").val(Number(val)-1);
-  //   var z = ($( "#printer3" ).val());
-  //   if(z==1)
-  //       {
-  //           var x = ($( "#material3" ).val());
-  //           var y = Number(val)-1;
-  //           $("#price3").text(x*y);
-  //           $("#finalPrice3").val(x*y);
-  //         }
-  //       else
-  //       {
-  //           var x = ($( "#material23" ).val());
-  //           var y = Number(val)-1;
-  //           $("#price3").text(x*y);
-  //           $("#finalPrice3").val(x*y);
-  //       }
-  //   var q = val;
-  //   $('#Display3').val(q);
-  //   console.log($('#Display3').val());
-  //   }
-  //   else{
-  //     $('#qty3').val(1);
-  //   }
-  // });
-  
-  
-  
-  
-  // // for fourth instance
-  // $("#qtymore4").click(function(){
-  //   val = $("#qty4").val();
-  //   $("#qty4").val(Number(val)+1);
-  //   var z = ($( "#printer4" ).val());
-  //   if(z==1)
-  //       {
-  //           var x = ($( "#material4" ).val());
-  //           var y = Number(val)+1;
-  //           console.log(x + "  " + y);
-  //           $("#price4").text(x*y);
-  //           $("#finalPrice4").val(x*y);
-  //         }
-  //       else
-  //       {
-  //           var x = ($( "#material24" ).val());
-  //           var y = Number(val+1);
-  //           $("#price4").text(x*y);
-  //           $("#finalPrice4").val(x*y);
-  //       }
-  //       finalval = Number(val)+1;
-  //       $("#quantity4").val(finalval);
-  // });
-  
-  
-  // $("#qtyless4").click(function(){
-  //   val = $("#qty4").val();
-  //   if(Number(val)>1){
-  //     $("#qty4").val(Number(val)-1);
-  //   var z = ($( "#printer4" ).val());
-  //   if(z==1)
-  //       {
-  //           var x = ($( "#material4" ).val());
-  //           var y = Number(val)-1;
-  //           $("#price4").text(x*y);
-  //           $("#finalPrice4").val(x*y);
-  //         }
-  //       else
-  //       {
-  //           var x = ($( "#material24" ).val());
-  //           var y = Number(val)-1;
-  //           $("#price4").text(x*y);
-  //           $("#finalPrice4").val(x*y);
-  //       }
-  //   var q = val;
-  //   $('#Display4').val(q);
-  //   console.log($('#Display4').val());
-  //   }
-  //   else{
-  //     $('#qty4').val(1);
-  //   }
-  // });
-  
-  
-  
-  
-  
-  // // for fifth instance
-  // $("#qtymore5").click(function(){
-  //   val = $("#qty5").val();
-  //   $("#qty5").val(Number(val)+1);
-  //   var z = ($( "#printer5" ).val());
-  //   if(z==1)
-  //       {
-  //           var x = ($( "#material5" ).val());
-  //           var y = Number(val)+1;
-  //           console.log(x + "  " + y);
-  //           $("#price5").text(x*y);
-  //           $("#finalPrice5").val(x*y);
-  //         }
-  //       else
-  //       {
-  //           var x = ($( "#material25" ).val());
-  //           var y = Number(val+1);
-  //           $("#price5").text(x*y);
-  //           $("#finalPrice5").val(x*y);
-  //       }
-  //       finalval = Number(val)+1;
-  //       $("#quantity5").val(finalval);
-  // });
-  
-  
-  // $("#qtyless5").click(function(){
-  //   val = $("#qty5").val();
-  //   if(Number(val)>1){
-  //     $("#qty5").val(Number(val)-1);
-  //   var z = ($( "#printer5" ).val());
-  //   if(z==1)
-  //       {
-  //           var x = ($( "#material5" ).val());
-  //           var y = Number(val)-1;
-  //           $("#price5").text(x*y);
-  //           $("#finalPrice5").val(x*y);
-  //         }
-  //       else
-  //       {
-  //           var x = ($( "#material25" ).val());
-  //           var y = Number(val)-1;
-  //           $("#price5").text(x*y);
-  //           $("#finalPrice5").val(x*y);
-  //       }
-  //   var q = val;
-  //   $('#Display5').val(q);
-  //   console.log($('#Display5').val());
-  //   }
-  //   else{
-  //     $('#qty5').val(1);
-  //   }
-  // });
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  // $("#qty1").change(function(){
-  //   val = $("#qty1").val();
-  //   numval = Number(val);
-    
-  // })
-  
-  
-  
-  
-  
-  // $('.qty-input i').on('click',function() {
-		// val = parseInt($('.qty-input input').val());
-    
-		// if ($(this).hasClass('less')) {
-		// 		val = val - 1;
-		// } else if ($(this).hasClass('more')) {
-		// 		val = val + 1;
-		// }
-		// if(val < 1) {
-		// 		val = 1;
-		// }
-		// $('.qty-input input').val(val);
-		
-  //   var z = ($( "#printer" ).val());
-  //   if(z==1)
-  //       {
-  //           var x = ($( "#material" ).val());
-  //           var y = Number(val);
-  //           console.log(x + "  " + y);
-  //           $("#price").text(x*y);
-  //           $("#totalPrice").val(x*y);
-  //       }
-  //       else
-  //       {
-  //           var x = ($( "#material2" ).val());
-  //           var y = Number(val);
-  //           console.log(x + "  " + y);
-  //           $("#price").text(x*y);
-  //           $("#totalPrice").val(x*y);
-  //       }
-    
-    
-    
-  //   var q = val;
-  //   $('#Display').val(q);
-  //   console.log($('#Display').val());
-  // });
   
   
   </script>
