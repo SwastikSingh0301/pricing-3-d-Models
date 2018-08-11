@@ -547,8 +547,1281 @@ $( "#infill1" ).change(function(){
 
 
 
+
+
+
+
+
+
+
+// for second instance
+$( "#layerHeight2" ).change(function(){
+  var lh = $( "#layerHeight2 option:selected" ).val();
+  // console.log(lh);
+  $('#printer2').hide();
+  $('#material2').hide();
+  $('#layerHeight2').hide();
+  $('#infill2').hide();
+  $('#layerHeightText2').text("");
+  $('#infillText2').text("");
+  $('#modelnametext2').text("");
+  $('#qtymore2').hide();
+  $('#qtyless2').hide();
+  $('#processing2').text("Processing");
+  var name = $('#modifyfilename2').val();
+  var id = $('#databaseId2').val();
+  // console.log(name);
+  var inf = $( "#infill2 option:selected" ).val();
+  // console.log (typeof inf);
+  var printertype = $( "#printer2 option:selected" ).val();
+  console.log (printertype);
+  console.log (typeof printertype);
+  if (printertype === "1"){
+    var material =  $( "#material2 option:selected" ).val();
+    console.log (material);
+    console.log(typeof material);
+  }
+  else{
+    var material =  $( "#material22 option:selected" ).val();
+    console.log (material);
+    console.log(typeof material);
+  }
+  var material =  $( "#material2 option:selected" ).val();
+  console.log (material);
+  console.log(typeof material);
+  var url = "https://sadfdf-swastik0310.c9users.io/uploadfile/modify-layer-height/" + lh + "/" + inf + "/" + name + "/" + id + "/" + material;
+  fetch(url)
+  .then(function(res){
+    console.log(res);
+    return res.json()
+  })
+  .then(function (data){
+    console.log(data);
+    var price = data.price;
+    $('#printer2').show();
+    $('#material2').show();
+    $('#layerHeight2').show();
+    $('#infill2').show();
+    $('#layerHeightText2').text("Layer Height");
+    $('#infillText2').text("Infill Percentage");
+    $('#modelnametext2').text(name);
+    $('#qtymore2').show();
+    $('#qtyless2').show();
+    $('#processing2').text("");
+    $('#price2').text(price);
+  })
+});
+
+
+
+
+// on infill change first instance
+$( "#infill2" ).change(function(){
+  var lh = $( "#layerHeight2 option:selected" ).val();
+  $('#printer2').hide();
+  $('#material2').hide();
+  $('#layerHeight2').hide();
+  $('#infill2').hide();
+  $('#layerHeightText2').text("");
+  $('#infillText2').text("");
+  $('#modelnametext2').text("");
+  $('#qtymore2').hide();
+  $('#qtyless2').hide();
+  $('#processing2').text("Processing");
+  // console.log(lh);
+  var name = $('#modifyfilename2').val();
+  var id = $('#databaseId2').val();
+  // console.log(name);
+  var inf = $( "#infill2 option:selected" ).val();
+  // console.log (typeof inf);
+  var printertype = $( "#printer2 option:selected" ).val();
+  console.log (printertype);
+  console.log (typeof printertype);
+  if (printertype === "1"){
+    var material =  $( "#material2 option:selected" ).val();
+    console.log (material);
+    console.log(typeof material);
+  }
+  else{
+    var material =  $( "#material22 option:selected" ).val();
+    console.log (material);
+    console.log(typeof material);
+  }
+  var url = "https://sadfdf-swastik0310.c9users.io/uploadfile/modify-infill-percentage/" + inf + "/" + lh + "/" + name + "/" + id + "/" + material;
+  fetch(url)
+  .then(function(res){
+    console.log(res);
+    return res.json()
+  })
+  .then(function (data){
+    console.log(data);
+    var price = data.price;
+    $('#printer2').show();
+    $('#material2').show();
+    $('#layerHeight2').show();
+    $('#infill2').show();
+    $('#layerHeightText2').text("Layer Height");
+    $('#infillText2').text("Infill Percentage");
+    $('#modelnametext2').text(name);
+    $('#qtymore2').show();
+    $('#qtyless2').show();
+    $('#processing2').text("");
+    $('#price2').text(price);
+  })
+});
+
+
+
+
   
   
+  // for first instance
+    $('#printer22').hide();
+    $( "#printer2" ).change(function(){
+      var id = $('#databaseId2').val();
+        // $("#disablePT1").prop('disabled',true);
+      var printerId = $( '#printer2' ).val();
+      console.log(printerId);
+      console.log (typeof printerId);
+      var url = "https://sadfdf-swastik0310.c9users.io/uploadfile/change-printer/" + id + "/" + printerId;
+      fetch(url)
+    .then(function(res){
+        console.log(res);
+        return res.json()
+      })
+        .then(function (data){
+        console.log(data);
+        var price = data.price;
+        $('#price2').text(price);
+      })
+
+      if(printerId === "1"){
+
+
+        $('#printer22').hide();
+        $('#printer12').show();
+        $('#modifyVal2').show();
+      }
+      else{
+        var x = ($( "#material22" ).val());
+
+        $('#printer12').hide();
+        $('#printer22').show();
+        $('#modifyVal2').hide();
+        }
+        // console.log(x);
+    });
+
+
+
+//  material FDM change first instance
+  $( "#material2" ).change(function(){
+  //   $("#disableMT1").prop('disabled',true);
+  $('#printer2').hide();
+  $('#material2').hide();
+  $('#layerHeight2').hide();
+  $('#infill2').hide();
+  $('#layerHeightText2').text("");
+  $('#infillText2').text("");
+  $('#modelnametext2').text("");
+  $('#qtymore2').hide();
+  $('#qtyless2').hide();
+  $('#processing2').text("Processing");
+  var id = $('#databaseId2').val();
+  var material = ($( "#material2" ).val());
+  var printerId = $( '#printer2' ).val();
+  var url = "https://sadfdf-swastik0310.c9users.io/uploadfile/change-material/" + id + "/" + printerId + "/" + material;
+  fetch(url)
+  .then(function(res){
+    console.log(res);
+    return res.json()
+  })
+  .then(function (data){
+    console.log(data);
+    var price = data.price;
+    $('#printer2').show();
+    $('#material2').show();
+    $('#layerHeight2').show();
+    $('#infill2').show();
+    $('#layerHeightText2').text("Layer Height");
+    $('#infillText2').text("Infill Percentage");
+    $('#modelnametext2').text(name);
+    $('#qtymore2').show();
+    $('#qtyless2').show();
+    $('#processing2').text("");
+    $('#price2').text(price);
+  })
+
+  });
+
+
+
+//  material sla change first instance
+  $( "#material22" ).change(function(){
+  //   $("#disableMT1").prop('disabled',true);
+    $('#printer2').hide();
+    $('#material22').hide();
+    $('#processing2').text("Processing");
+    $('#qtymore2').hide();
+    $('#qtyless2').hide();
+    var id = $('#databaseId2').val();
+    var material = ($( "#material22" ).val());
+    var printerId = $( '#printer2').val();
+    var url = "https://sadfdf-swastik0310.c9users.io/uploadfile/change-material/" + id + "/" + printerId + "/" + material;
+    fetch(url)
+    .then(function(res){
+      console.log(res);
+      return res.json()
+    })
+    .then(function (data){
+      console.log(data);
+      var price = data.price;
+      $('#printer2').show();
+      $('#material22').show();
+      $('#processing2').text("");
+      $('#qtymore2').show();
+      $('#qtyless2').show();
+      $('#price2').text(price);
+    })
+  });
+
+
+
+
+// lets work on quantity
+
+  $("#qtymore2").click(function(){
+    val = $("#qty2").val();
+    $("#qty2").val(Number(val)+1);
+    var id = $('#databaseId2').val();
+    console.log(val);
+    console.log(typeof val);
+    var newval = $("#qty2").val();
+    console.log(newval);
+    console.log(typeof newval);
+    var price = $('#price2').text();
+    price = Number(price) / Number(val);
+    var newprice = price * Number(newval);
+    console.log (newprice);
+    newprice = newprice.toString();
+    $('#price2').text(newprice);
+    $('#qtymore2').hide();
+    $('#qtyless2').hide();
+
+    var url = "https://sadfdf-swastik0310.c9users.io/uploadfile/increase-quantity/" + id + "/" + newval;
+    fetch(url)
+    .then(function(res){
+      console.log(res);
+      return res.json()
+    })
+    .then(function (data){
+      console.log(data);
+      var price = data.price;
+      $('#price2').text(price);
+      $('#qtymore2').show();
+      $('#qtyless2').show();
+
+    })
+  });
+  
+  
+  
+  
+  
+  
+  $("#qtyless2").click(function(){
+    val = $("#qty2").val();
+    if(Number(val) > 1){
+      $("#qty2").val(Number(val)-1);
+      var id = $('#databaseId2').val();
+      console.log(val);
+      console.log(typeof val);
+      var newval = $("#qty2").val();
+      console.log(newval);
+      console.log(typeof newval);
+      var price = $('#price2').text();
+      price = Number(price) / Number(val);
+      var newprice = price * Number(newval);
+      console.log (newprice);
+      newprice = newprice.toString();
+      $('#price2').text(newprice);
+      $('#qtymore2').hide();
+      $('#qtyless2').hide();
+
+      var url = "https://sadfdf-swastik0310.c9users.io/uploadfile/decrease-quantity/" + id + "/" + newval;
+      fetch(url)
+      .then(function(res){
+        console.log(res);
+        return res.json()
+      })
+      .then(function (data){
+        console.log(data);
+        var price = data.price;
+        $('#price2').text(price);
+        $('#qtymore2').show();
+        $('#qtyless2').show();
+
+  
+      })
+    }
+  });
+
+
+
+
+
+
+
+// for third instance
+$( "#layerHeight3" ).change(function(){
+  var lh = $( "#layerHeight3 option:selected" ).val();
+  // console.log(lh);
+  $('#printer3').hide();
+  $('#material3').hide();
+  $('#layerHeight3').hide();
+  $('#infill3').hide();
+  $('#layerHeightText3').text("");
+  $('#infillText3').text("");
+  $('#modelnametext3').text("");
+  $('#qtymore3').hide();
+  $('#qtyless3').hide();
+  $('#processing3').text("Processing");
+  var name = $('#modifyfilename3').val();
+  var id = $('#databaseId3').val();
+  // console.log(name);
+  var inf = $( "#infill3 option:selected" ).val();
+  // console.log (typeof inf);
+  var printertype = $( "#printer3 option:selected" ).val();
+  console.log (printertype);
+  console.log (typeof printertype);
+  if (printertype === "1"){
+    var material =  $( "#material3 option:selected" ).val();
+    console.log (material);
+    console.log(typeof material);
+  }
+  else{
+    var material =  $( "#material23 option:selected" ).val();
+    console.log (material);
+    console.log(typeof material);
+  }
+  var material =  $( "#material3 option:selected" ).val();
+  console.log (material);
+  console.log(typeof material);
+  var url = "https://sadfdf-swastik0310.c9users.io/uploadfile/modify-layer-height/" + lh + "/" + inf + "/" + name + "/" + id + "/" + material;
+  fetch(url)
+  .then(function(res){
+    console.log(res);
+    return res.json()
+  })
+  .then(function (data){
+    console.log(data);
+    var price = data.price;
+    $('#printer3').show();
+    $('#material3').show();
+    $('#layerHeight3').show();
+    $('#infill3').show();
+    $('#layerHeightText3').text("Layer Height");
+    $('#infillText3').text("Infill Percentage");
+    $('#modelnametext3').text(name);
+    $('#qtymore3').show();
+    $('#qtyless3').show();
+    $('#processing3').text("");
+    $('#price3').text(price);
+  })
+});
+
+
+
+
+// on infill change first instance
+$( "#infill3" ).change(function(){
+  var lh = $( "#layerHeight3 option:selected" ).val();
+  $('#printer3').hide();
+  $('#material3').hide();
+  $('#layerHeight3').hide();
+  $('#infill3').hide();
+  $('#layerHeightText3').text("");
+  $('#infillText3').text("");
+  $('#modelnametext3').text("");
+  $('#qtymore3').hide();
+  $('#qtyless3').hide();
+  $('#processing3').text("Processing");
+  // console.log(lh);
+  var name = $('#modifyfilename3').val();
+  var id = $('#databaseId3').val();
+  // console.log(name);
+  var inf = $( "#infill3 option:selected" ).val();
+  // console.log (typeof inf);
+  var printertype = $( "#printer3 option:selected" ).val();
+  console.log (printertype);
+  console.log (typeof printertype);
+  if (printertype === "1"){
+    var material =  $( "#material3 option:selected" ).val();
+    console.log (material);
+    console.log(typeof material);
+  }
+  else{
+    var material =  $( "#material23 option:selected" ).val();
+    console.log (material);
+    console.log(typeof material);
+  }
+  var url = "https://sadfdf-swastik0310.c9users.io/uploadfile/modify-infill-percentage/" + inf + "/" + lh + "/" + name + "/" + id + "/" + material;
+  fetch(url)
+  .then(function(res){
+    console.log(res);
+    return res.json()
+  })
+  .then(function (data){
+    console.log(data);
+    var price = data.price;
+    $('#printer3').show();
+    $('#material3').show();
+    $('#layerHeight3').show();
+    $('#infill3').show();
+    $('#layerHeightText3').text("Layer Height");
+    $('#infillText3').text("Infill Percentage");
+    $('#modelnametext3').text(name);
+    $('#qtymore3').show();
+    $('#qtyless3').show();
+    $('#processing3').text("");
+    $('#price3').text(price);
+  })
+});
+
+
+
+
+  
+  
+  // for first instance
+    $('#printer23').hide();
+    $( "#printer3" ).change(function(){
+      var id = $('#databaseId3').val();
+        // $("#disablePT1").prop('disabled',true);
+      var printerId = $( '#printer3' ).val();
+      console.log(printerId);
+      console.log (typeof printerId);
+      var url = "https://sadfdf-swastik0310.c9users.io/uploadfile/change-printer/" + id + "/" + printerId;
+      fetch(url)
+    .then(function(res){
+        console.log(res);
+        return res.json()
+      })
+        .then(function (data){
+        console.log(data);
+        var price = data.price;
+        $('#price3').text(price);
+      })
+
+      if(printerId === "1"){
+
+
+        $('#printer23').hide();
+        $('#printer13').show();
+        $('#modifyVal3').show();
+      }
+      else{
+        var x = ($( "#material23" ).val());
+
+        $('#printer13').hide();
+        $('#printer23').show();
+        $('#modifyVal3').hide();
+        }
+        // console.log(x);
+    });
+
+
+
+//  material FDM change first instance
+  $( "#material3" ).change(function(){
+  //   $("#disableMT1").prop('disabled',true);
+  $('#printer3').hide();
+  $('#material3').hide();
+  $('#layerHeight3').hide();
+  $('#infill3').hide();
+  $('#layerHeightText3').text("");
+  $('#infillText3').text("");
+  $('#modelnametext3').text("");
+  $('#qtymore3').hide();
+  $('#qtyless3').hide();
+  $('#processing3').text("Processing");
+  var id = $('#databaseId3').val();
+  var material = ($( "#material3" ).val());
+  var printerId = $( '#printer3' ).val();
+  var url = "https://sadfdf-swastik0310.c9users.io/uploadfile/change-material/" + id + "/" + printerId + "/" + material;
+  fetch(url)
+  .then(function(res){
+    console.log(res);
+    return res.json()
+  })
+  .then(function (data){
+    console.log(data);
+    var price = data.price;
+    $('#printer3').show();
+    $('#material3').show();
+    $('#layerHeight3').show();
+    $('#infill3').show();
+    $('#layerHeightText3').text("Layer Height");
+    $('#infillText3').text("Infill Percentage");
+    $('#modelnametext3').text(name);
+    $('#qtymore3').show();
+    $('#qtyless3').show();
+    $('#processing3').text("");
+    $('#price3').text(price);
+  })
+
+  });
+
+
+
+//  material sla change first instance
+  $( "#material23" ).change(function(){
+  //   $("#disableMT1").prop('disabled',true);
+    $('#printer3').hide();
+    $('#material23').hide();
+    $('#processing3').text("Processing");
+    $('#qtymore3').hide();
+    $('#qtyless3').hide();
+    var id = $('#databaseId3').val();
+    var material = ($( "#material23" ).val());
+    var printerId = $( '#printer3').val();
+    var url = "https://sadfdf-swastik0310.c9users.io/uploadfile/change-material/" + id + "/" + printerId + "/" + material;
+    fetch(url)
+    .then(function(res){
+      console.log(res);
+      return res.json()
+    })
+    .then(function (data){
+      console.log(data);
+      var price = data.price;
+      $('#printer3').show();
+      $('#material23').show();
+      $('#processing3').text("");
+      $('#qtymore3').show();
+      $('#qtyless3').show();
+      $('#price3').text(price);
+    })
+  });
+
+
+
+
+// lets work on quantity
+
+  $("#qtymore3").click(function(){
+    val = $("#qty3").val();
+    $("#qty3").val(Number(val)+1);
+    var id = $('#databaseId3').val();
+    console.log(val);
+    console.log(typeof val);
+    var newval = $("#qty3").val();
+    console.log(newval);
+    console.log(typeof newval);
+    var price = $('#price3').text();
+    price = Number(price) / Number(val);
+    var newprice = price * Number(newval);
+    console.log (newprice);
+    newprice = newprice.toString();
+    $('#price3').text(newprice);
+    $('#qtymore3').hide();
+    $('#qtyless3').hide();
+
+    var url = "https://sadfdf-swastik0310.c9users.io/uploadfile/increase-quantity/" + id + "/" + newval;
+    fetch(url)
+    .then(function(res){
+      console.log(res);
+      return res.json()
+    })
+    .then(function (data){
+      console.log(data);
+      var price = data.price;
+      $('#price3').text(price);
+      $('#qtymore3').show();
+      $('#qtyless3').show();
+
+    })
+  });
+  
+  
+  
+  
+  
+  
+  $("#qtyless3").click(function(){
+    val = $("#qty3").val();
+    if(Number(val) > 1){
+      $("#qty3").val(Number(val)-1);
+      var id = $('#databaseId3').val();
+      console.log(val);
+      console.log(typeof val);
+      var newval = $("#qty3").val();
+      console.log(newval);
+      console.log(typeof newval);
+      var price = $('#price3').text();
+      price = Number(price) / Number(val);
+      var newprice = price * Number(newval);
+      console.log (newprice);
+      newprice = newprice.toString();
+      $('#price3').text(newprice);
+      $('#qtymore3').hide();
+      $('#qtyless3').hide();
+
+      var url = "https://sadfdf-swastik0310.c9users.io/uploadfile/decrease-quantity/" + id + "/" + newval;
+      fetch(url)
+      .then(function(res){
+        console.log(res);
+        return res.json()
+      })
+      .then(function (data){
+        console.log(data);
+        var price = data.price;
+        $('#price3').text(price);
+        $('#qtymore3').show();
+        $('#qtyless3').show();
+
+  
+      })
+    }
+  });
+
+
+
+
+// for fourth instance
+$( "#layerHeight4" ).change(function(){
+  var lh = $( "#layerHeight4 option:selected" ).val();
+  // console.log(lh);
+  $('#printer4').hide();
+  $('#material4').hide();
+  $('#layerHeight4').hide();
+  $('#infill4').hide();
+  $('#layerHeightText4').text("");
+  $('#infillText4').text("");
+  $('#modelnametext4').text("");
+  $('#qtymore4').hide();
+  $('#qtyless4').hide();
+  $('#processing4').text("Processing");
+  var name = $('#modifyfilename4').val();
+  var id = $('#databaseId4').val();
+  // console.log(name);
+  var inf = $( "#infill4 option:selected" ).val();
+  // console.log (typeof inf);
+  var printertype = $( "#printer4 option:selected" ).val();
+  console.log (printertype);
+  console.log (typeof printertype);
+  if (printertype === "1"){
+    var material =  $( "#material4 option:selected" ).val();
+    console.log (material);
+    console.log(typeof material);
+  }
+  else{
+    var material =  $( "#material24 option:selected" ).val();
+    console.log (material);
+    console.log(typeof material);
+  }
+  var material =  $( "#material4 option:selected" ).val();
+  console.log (material);
+  console.log(typeof material);
+  var url = "https://sadfdf-swastik0310.c9users.io/uploadfile/modify-layer-height/" + lh + "/" + inf + "/" + name + "/" + id + "/" + material;
+  fetch(url)
+  .then(function(res){
+    console.log(res);
+    return res.json()
+  })
+  .then(function (data){
+    console.log(data);
+    var price = data.price;
+    $('#printer4').show();
+    $('#material4').show();
+    $('#layerHeight4').show();
+    $('#infill4').show();
+    $('#layerHeightText4').text("Layer Height");
+    $('#infillText4').text("Infill Percentage");
+    $('#modelnametext4').text(name);
+    $('#qtymore4').show();
+    $('#qtyless4').show();
+    $('#processing4').text("");
+    $('#price4').text(price);
+  })
+});
+
+
+
+
+// on infill change first instance
+$( "#infill4" ).change(function(){
+  var lh = $( "#layerHeight4 option:selected" ).val();
+  $('#printer4').hide();
+  $('#material4').hide();
+  $('#layerHeight4').hide();
+  $('#infill4').hide();
+  $('#layerHeightText4').text("");
+  $('#infillText4').text("");
+  $('#modelnametext4').text("");
+  $('#qtymore4').hide();
+  $('#qtyless4').hide();
+  $('#processing4').text("Processing");
+  // console.log(lh);
+  var name = $('#modifyfilename4').val();
+  var id = $('#databaseId4').val();
+  // console.log(name);
+  var inf = $( "#infill4 option:selected" ).val();
+  // console.log (typeof inf);
+  var printertype = $( "#printer4 option:selected" ).val();
+  console.log (printertype);
+  console.log (typeof printertype);
+  if (printertype === "1"){
+    var material =  $( "#material4 option:selected" ).val();
+    console.log (material);
+    console.log(typeof material);
+  }
+  else{
+    var material =  $( "#material24 option:selected" ).val();
+    console.log (material);
+    console.log(typeof material);
+  }
+  var url = "https://sadfdf-swastik0310.c9users.io/uploadfile/modify-infill-percentage/" + inf + "/" + lh + "/" + name + "/" + id + "/" + material;
+  fetch(url)
+  .then(function(res){
+    console.log(res);
+    return res.json()
+  })
+  .then(function (data){
+    console.log(data);
+    var price = data.price;
+    $('#printer4').show();
+    $('#material4').show();
+    $('#layerHeight4').show();
+    $('#infill4').show();
+    $('#layerHeightText4').text("Layer Height");
+    $('#infillText4').text("Infill Percentage");
+    $('#modelnametext4').text(name);
+    $('#qtymore4').show();
+    $('#qtyless4').show();
+    $('#processing4').text("");
+    $('#price4').text(price);
+  })
+});
+
+
+
+
+  
+  
+  // for first instance
+    $('#printer24').hide();
+    $( "#printer4" ).change(function(){
+      var id = $('#databaseId4').val();
+        // $("#disablePT1").prop('disabled',true);
+      var printerId = $( '#printer4' ).val();
+      console.log(printerId);
+      console.log (typeof printerId);
+      var url = "https://sadfdf-swastik0310.c9users.io/uploadfile/change-printer/" + id + "/" + printerId;
+      fetch(url)
+    .then(function(res){
+        console.log(res);
+        return res.json()
+      })
+        .then(function (data){
+        console.log(data);
+        var price = data.price;
+        $('#price4').text(price);
+      })
+
+      if(printerId === "1"){
+
+
+        $('#printer24').hide();
+        $('#printer14').show();
+        $('#modifyVal4').show();
+      }
+      else{
+        var x = ($( "#material24" ).val());
+
+        $('#printer14').hide();
+        $('#printer24').show();
+        $('#modifyVal4').hide();
+        }
+        // console.log(x);
+    });
+
+
+
+//  material FDM change first instance
+  $( "#material4" ).change(function(){
+  //   $("#disableMT1").prop('disabled',true);
+  $('#printer4').hide();
+  $('#material4').hide();
+  $('#layerHeight4').hide();
+  $('#infill4').hide();
+  $('#layerHeightText4').text("");
+  $('#infillText4').text("");
+  $('#modelnametext4').text("");
+  $('#qtymore4').hide();
+  $('#qtyless4').hide();
+  $('#processing4').text("Processing");
+  var id = $('#databaseId4').val();
+  var material = ($( "#material4" ).val());
+  var printerId = $( '#printer4' ).val();
+  var url = "https://sadfdf-swastik0310.c9users.io/uploadfile/change-material/" + id + "/" + printerId + "/" + material;
+  fetch(url)
+  .then(function(res){
+    console.log(res);
+    return res.json()
+  })
+  .then(function (data){
+    console.log(data);
+    var price = data.price;
+    $('#printer4').show();
+    $('#material4').show();
+    $('#layerHeight4').show();
+    $('#infill4').show();
+    $('#layerHeightText4').text("Layer Height");
+    $('#infillText4').text("Infill Percentage");
+    $('#modelnametext4').text(name);
+    $('#qtymore4').show();
+    $('#qtyless4').show();
+    $('#processing4').text("");
+    $('#price4').text(price);
+  })
+
+  });
+
+
+
+//  material sla change first instance
+  $( "#material24" ).change(function(){
+  //   $("#disableMT1").prop('disabled',true);
+    $('#printer4').hide();
+    $('#material24').hide();
+    $('#processing4').text("Processing");
+    $('#qtymore4').hide();
+    $('#qtyless4').hide();
+    var id = $('#databaseId4').val();
+    var material = ($( "#material24" ).val());
+    var printerId = $( '#printer4').val();
+    var url = "https://sadfdf-swastik0310.c9users.io/uploadfile/change-material/" + id + "/" + printerId + "/" + material;
+    fetch(url)
+    .then(function(res){
+      console.log(res);
+      return res.json()
+    })
+    .then(function (data){
+      console.log(data);
+      var price = data.price;
+      $('#printer4').show();
+      $('#material24').show();
+      $('#processing4').text("");
+      $('#qtymore4').show();
+      $('#qtyless4').show();
+      $('#price4').text(price);
+    })
+  });
+
+
+
+
+// lets work on quantity
+
+  $("#qtymore4").click(function(){
+    val = $("#qty4").val();
+    $("#qty4").val(Number(val)+1);
+    var id = $('#databaseId4').val();
+    console.log(val);
+    console.log(typeof val);
+    var newval = $("#qty4").val();
+    console.log(newval);
+    console.log(typeof newval);
+    var price = $('#price4').text();
+    price = Number(price) / Number(val);
+    var newprice = price * Number(newval);
+    console.log (newprice);
+    newprice = newprice.toString();
+    $('#price4').text(newprice);
+    $('#qtymore4').hide();
+    $('#qtyless4').hide();
+
+    var url = "https://sadfdf-swastik0310.c9users.io/uploadfile/increase-quantity/" + id + "/" + newval;
+    fetch(url)
+    .then(function(res){
+      console.log(res);
+      return res.json()
+    })
+    .then(function (data){
+      console.log(data);
+      var price = data.price;
+      $('#price4').text(price);
+      $('#qtymore4').show();
+      $('#qtyless4').show();
+
+    })
+  });
+  
+  
+  
+  
+  
+  
+  $("#qtyless4").click(function(){
+    val = $("#qty4").val();
+    if(Number(val) > 1){
+      $("#qty4").val(Number(val)-1);
+      var id = $('#databaseId4').val();
+      console.log(val);
+      console.log(typeof val);
+      var newval = $("#qty4").val();
+      console.log(newval);
+      console.log(typeof newval);
+      var price = $('#price4').text();
+      price = Number(price) / Number(val);
+      var newprice = price * Number(newval);
+      console.log (newprice);
+      newprice = newprice.toString();
+      $('#price4').text(newprice);
+      $('#qtymore4').hide();
+      $('#qtyless4').hide();
+
+      var url = "https://sadfdf-swastik0310.c9users.io/uploadfile/decrease-quantity/" + id + "/" + newval;
+      fetch(url)
+      .then(function(res){
+        console.log(res);
+        return res.json()
+      })
+      .then(function (data){
+        console.log(data);
+        var price = data.price;
+        $('#price4').text(price);
+        $('#qtymore4').show();
+        $('#qtyless4').show();
+
+  
+      })
+    }
+  });
+  
+  
+  
+  
+  
+  
+  
+  
+// for fifth instance
+$( "#layerHeight5" ).change(function(){
+  var lh = $( "#layerHeight5 option:selected" ).val();
+  // console.log(lh);
+  $('#printer5').hide();
+  $('#material5').hide();
+  $('#layerHeight5').hide();
+  $('#infill5').hide();
+  $('#layerHeightText5').text("");
+  $('#infillText5').text("");
+  $('#modelnametext5').text("");
+  $('#qtymore5').hide();
+  $('#qtyless5').hide();
+  $('#processing5').text("Processing");
+  var name = $('#modifyfilename5').val();
+  var id = $('#databaseId5').val();
+  // console.log(name);
+  var inf = $( "#infill5 option:selected" ).val();
+  // console.log (typeof inf);
+  var printertype = $( "#printer5 option:selected" ).val();
+  console.log (printertype);
+  console.log (typeof printertype);
+  if (printertype === "1"){
+    var material =  $( "#material5 option:selected" ).val();
+    console.log (material);
+    console.log(typeof material);
+  }
+  else{
+    var material =  $( "#material25 option:selected" ).val();
+    console.log (material);
+    console.log(typeof material);
+  }
+  var material =  $( "#material5 option:selected" ).val();
+  console.log (material);
+  console.log(typeof material);
+  var url = "https://sadfdf-swastik0310.c9users.io/uploadfile/modify-layer-height/" + lh + "/" + inf + "/" + name + "/" + id + "/" + material;
+  fetch(url)
+  .then(function(res){
+    console.log(res);
+    return res.json()
+  })
+  .then(function (data){
+    console.log(data);
+    var price = data.price;
+    $('#printer5').show();
+    $('#material5').show();
+    $('#layerHeight5').show();
+    $('#infill5').show();
+    $('#layerHeightText5').text("Layer Height");
+    $('#infillText5').text("Infill Percentage");
+    $('#modelnametext5').text(name);
+    $('#qtymore5').show();
+    $('#qtyless5').show();
+    $('#processing5').text("");
+    $('#price5').text(price);
+  })
+});
+
+
+
+
+// on infill change first instance
+$( "#infill5" ).change(function(){
+  var lh = $( "#layerHeight5 option:selected" ).val();
+  $('#printer5').hide();
+  $('#material5').hide();
+  $('#layerHeight5').hide();
+  $('#infill5').hide();
+  $('#layerHeightText5').text("");
+  $('#infillText5').text("");
+  $('#modelnametext5').text("");
+  $('#qtymore5').hide();
+  $('#qtyless5').hide();
+  $('#processing5').text("Processing");
+  // console.log(lh);
+  var name = $('#modifyfilename5').val();
+  var id = $('#databaseId5').val();
+  // console.log(name);
+  var inf = $( "#infill5 option:selected" ).val();
+  // console.log (typeof inf);
+  var printertype = $( "#printer5 option:selected" ).val();
+  console.log (printertype);
+  console.log (typeof printertype);
+  if (printertype === "1"){
+    var material =  $( "#material5 option:selected" ).val();
+    console.log (material);
+    console.log(typeof material);
+  }
+  else{
+    var material =  $( "#material25 option:selected" ).val();
+    console.log (material);
+    console.log(typeof material);
+  }
+  var url = "https://sadfdf-swastik0310.c9users.io/uploadfile/modify-infill-percentage/" + inf + "/" + lh + "/" + name + "/" + id + "/" + material;
+  fetch(url)
+  .then(function(res){
+    console.log(res);
+    return res.json()
+  })
+  .then(function (data){
+    console.log(data);
+    var price = data.price;
+    $('#printer5').show();
+    $('#material5').show();
+    $('#layerHeight5').show();
+    $('#infill5').show();
+    $('#layerHeightText5').text("Layer Height");
+    $('#infillText5').text("Infill Percentage");
+    $('#modelnametext5').text(name);
+    $('#qtymore5').show();
+    $('#qtyless5').show();
+    $('#processing5').text("");
+    $('#price5').text(price);
+  })
+});
+
+
+
+
+  
+  
+  // for first instance
+    $('#printer25').hide();
+    $( "#printer5" ).change(function(){
+      var id = $('#databaseId5').val();
+        // $("#disablePT1").prop('disabled',true);
+      var printerId = $( '#printer5' ).val();
+      console.log(printerId);
+      console.log (typeof printerId);
+      var url = "https://sadfdf-swastik0310.c9users.io/uploadfile/change-printer/" + id + "/" + printerId;
+      fetch(url)
+    .then(function(res){
+        console.log(res);
+        return res.json()
+      })
+        .then(function (data){
+        console.log(data);
+        var price = data.price;
+        $('#price5').text(price);
+      })
+
+      if(printerId === "1"){
+
+
+        $('#printer25').hide();
+        $('#printer15').show();
+        $('#modifyVal5').show();
+      }
+      else{
+        var x = ($( "#material25" ).val());
+
+        $('#printer15').hide();
+        $('#printer25').show();
+        $('#modifyVal5').hide();
+        }
+        // console.log(x);
+    });
+
+
+
+//  material FDM change first instance
+  $( "#material5" ).change(function(){
+  //   $("#disableMT1").prop('disabled',true);
+  $('#printer5').hide();
+  $('#material5').hide();
+  $('#layerHeight5').hide();
+  $('#infill5').hide();
+  $('#layerHeightText5').text("");
+  $('#infillText5').text("");
+  $('#modelnametext5').text("");
+  $('#qtymore5').hide();
+  $('#qtyless5').hide();
+  $('#processing5').text("Processing");
+  var id = $('#databaseId5').val();
+  var material = ($( "#material5" ).val());
+  var printerId = $( '#printer5' ).val();
+  var url = "https://sadfdf-swastik0310.c9users.io/uploadfile/change-material/" + id + "/" + printerId + "/" + material;
+  fetch(url)
+  .then(function(res){
+    console.log(res);
+    return res.json()
+  })
+  .then(function (data){
+    console.log(data);
+    var price = data.price;
+    $('#printer5').show();
+    $('#material5').show();
+    $('#layerHeight5').show();
+    $('#infill5').show();
+    $('#layerHeightText5').text("Layer Height");
+    $('#infillText5').text("Infill Percentage");
+    $('#modelnametext5').text(name);
+    $('#qtymore5').show();
+    $('#qtyless5').show();
+    $('#processing5').text("");
+    $('#price5').text(price);
+  })
+
+  });
+
+
+
+//  material sla change first instance
+  $( "#material25" ).change(function(){
+  //   $("#disableMT1").prop('disabled',true);
+    $('#printer5').hide();
+    $('#material25').hide();
+    $('#processing5').text("Processing");
+    $('#qtymore5').hide();
+    $('#qtyless5').hide();
+    var id = $('#databaseId5').val();
+    var material = ($( "#material25" ).val());
+    var printerId = $( '#printer5').val();
+    var url = "https://sadfdf-swastik0310.c9users.io/uploadfile/change-material/" + id + "/" + printerId + "/" + material;
+    fetch(url)
+    .then(function(res){
+      console.log(res);
+      return res.json()
+    })
+    .then(function (data){
+      console.log(data);
+      var price = data.price;
+      $('#printer5').show();
+      $('#material25').show();
+      $('#processing5').text("");
+      $('#qtymore5').show();
+      $('#qtyless5').show();
+      $('#price5').text(price);
+    })
+  });
+
+
+
+
+// lets work on quantity
+
+  $("#qtymore5").click(function(){
+    val = $("#qty5").val();
+    $("#qty5").val(Number(val)+1);
+    var id = $('#databaseId5').val();
+    console.log(val);
+    console.log(typeof val);
+    var newval = $("#qty5").val();
+    console.log(newval);
+    console.log(typeof newval);
+    var price = $('#price5').text();
+    price = Number(price) / Number(val);
+    var newprice = price * Number(newval);
+    console.log (newprice);
+    newprice = newprice.toString();
+    $('#price5').text(newprice);
+    $('#qtymore5').hide();
+    $('#qtyless5').hide();
+
+    var url = "https://sadfdf-swastik0310.c9users.io/uploadfile/increase-quantity/" + id + "/" + newval;
+    fetch(url)
+    .then(function(res){
+      console.log(res);
+      return res.json()
+    })
+    .then(function (data){
+      console.log(data);
+      var price = data.price;
+      $('#price5').text(price);
+      $('#qtymore5').show();
+      $('#qtyless5').show();
+
+    })
+  });
+  
+  
+  
+  
+  
+  
+  $("#qtyless5").click(function(){
+    val = $("#qty5").val();
+    if(Number(val) > 1){
+      $("#qty5").val(Number(val)-1);
+      var id = $('#databaseId5').val();
+      console.log(val);
+      console.log(typeof val);
+      var newval = $("#qty5").val();
+      console.log(newval);
+      console.log(typeof newval);
+      var price = $('#price5').text();
+      price = Number(price) / Number(val);
+      var newprice = price * Number(newval);
+      console.log (newprice);
+      newprice = newprice.toString();
+      $('#price5').text(newprice);
+      $('#qtymore5').hide();
+      $('#qtyless5').hide();
+
+      var url = "https://sadfdf-swastik0310.c9users.io/uploadfile/decrease-quantity/" + id + "/" + newval;
+      fetch(url)
+      .then(function(res){
+        console.log(res);
+        return res.json()
+      })
+      .then(function (data){
+        console.log(data);
+        var price = data.price;
+        $('#price5').text(price);
+        $('#qtymore5').show();
+        $('#qtyless5').show();
+
+  
+      })
+    }
+  });
+
+
+
+
+
   </script>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
     crossorigin="anonymous"></script>
