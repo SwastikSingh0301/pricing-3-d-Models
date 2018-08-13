@@ -17,217 +17,210 @@
 <body>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
     crossorigin="anonymous"></script>
+ 
+  <!--navbar-------------------------------------------------------------------------------------------------------------------------->
+  <nav class="navbar fixed-top  navbar-expand-md navbar-dark bg-dark">
+    <a class="navbar-brand" href="/">IamRapid</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-<!--navbar-------------------------------------------------------------------------------------------------------------------------->
-<nav class="navbar fixed-top  navbar-expand-md navbar-dark bg-dark">
-  <a class="navbar-brand" href="/">IamRapid</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="/t">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Contact Us</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">About Us</a>
-      </li>
-    </ul>
-    <div class="form-inline my-2 my-lg-0">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><a href="/mycart" >Cart :  <span id="cartItems"><%=cartItems%></span> </a></button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <!--<li class="nav-item active">-->
+        <!--  <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>-->
+        <!--</li>-->
+        <!--<li class="nav-item">-->
+        <!--  <a class="nav-link" href="#">Contact Us</a>-->
+        <!--</li>-->
+        <!--<li class="nav-item">-->
+        <!--  <a class="nav-link" href="#">About Us</a>-->
+        <!--</li>-->
+      </ul>
+      <div class="form-inline my-2 my-lg-0">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><a href="/mycart" >Cart<span id="cartItems"></span> </a></button>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
 
-<!---------------------------------------------------------------------------------------------------------------------------------->
-<div class="container marginNav">
-  <hr>
-<div class="row">
-    <div class="col-md-12 m-auto ">
-      <!--<h1 class="text-center display-4 my-4">Home Page</h1>-->
-      
-      <!--<div class="custom-file mb-3" style = "border : 1px solid black">-->
-      <form action="/upload" method="POST" enctype="multipart/form-data" ref='uploadForm' 
-        id='uploadForm' class="fileupload ddColor " style=" height:200px">
-        <div class="custom-file mb-3 shadow ddColor" style="height:200px; border: 2px solid lightgray">
+  <!---------------------------------------------------------------------------------------------------------------------------------->
+  <div class="container marginNav">
+    <hr>
+    <div class="row">
+      <div class="col-md-12 m-auto ">
+        <!--<h1 class="text-center display-4 my-4">Home Page</h1>-->
+        <!--<div class="custom-file mb-3" style = "border : 1px solid black">-->
+        <form action="/upload" method="POST" enctype="multipart/form-data" ref='uploadForm' 
+          id='uploadForm' class="fileupload ddColor " style=" height:200px">
+          <div class="custom-file mb-3 shadow ddColor" style="height:200px; border: 2px solid lightgray">
             <input type="file" name="sampleFile" class="custom-file-input ddColor " onchange="form.submit()" style="height:200px"/>
             <label for="file" class="custom-file-label ddColor" >
               <p>  </p>
               <h2> Drag and Drop files or Click to upload</h2>
               <hr>
               <h5>Supported file formats:</h5>
-              <p>.stl or .zip</p>
+              <p>only .stl files</p>
             </label>
-        </div>
-      </form>
-      <!--</div>-->
-      
-      <hr>
-    </div>
-
-<div class="container">
-  <div class="row">
-<% var counter = 0; %>
-<% obj.forEach(function(data){ %>
-  <% counter = counter + 1; %>
-  <% var counterstr = counter.toString(); %>
-  <% console.log(counterstr); %>
-  <div class="col-lg-12 col-md-12 shadow" style="border: 1px solid darkgray; margin: 10px 0; height:300px; border-radius:  .5rem .5rem "  >
-   
-    <div class="row">
-    <div class="thumbnail col-lg-4 col-md-4" style="border-right: 1px solid darkgray; height:298px; background-color:white; ">
-        <img src="/<%=data.fileName%>.jpg" height="80%"/>
-    </div>
-    
-    <div class="col-lg-4 col-md-4 addBackgroundColor" style="border-right: 1px solid darkgray; height:298px;">
-        <h5 style="margin-top:10px;" id = "modelnametext<%=counter.toString();%>" ><%=data.fileName%></h5>
-        <div style="margin-top:5px;">
-            <select class="custom-select" id="printer<%=counter.toString();%>">
-              <!--<option value="1" default id="disablePT<%=counter.toString();%>" >Printer (default-FDM Printer)</option>-->
-              <!--<input type="text" name="filename"      id = "filename"      value="<%=data.fileName%>"  style="display : none"/>-->
-              <!--<input type="text" name="fileweight"    id = "fileweight"    value="<%=data.weight%>"    style="display : none"/>-->
-              <!--<input type="text" name="fileprinttime" id = "fileprinttime" value="<%=data.printTime%>" style="display : none"/>-->
-              <option value="1" density="1.2" selected = "selected">FDM Printer</option>
-              <option value="2" density="1.2">SLA Printer</option>
-            </select>
-        </div>
-        <div id="printer1<%=counter.toString();%>">
-            <!--<select class="custom-select" id="material<%=counter.toString();%>">-->
-            <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(10*Math.ceil(Number(data.weight)*0.00125+2))+100%>" default id="disableMT<%=counter.toString();%>" >Material (default-PLA(White))</option>-->
-            <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(10*Math.ceil(Number(data.weight)*0.00125+2))+100%>" density="1.25">PLA (White)</option>-->
-            <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(10*Math.ceil(Number(data.weight)*0.00125+2))+100%>" density="1.25">PLA (Black)</option>-->
-            <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(10*Math.ceil(Number(data.weight)*0.00125+2))+100%>" density="1.25">PLA (Brown)</option>-->
-            <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(10*Math.ceil(Number(data.weight)*0.00125+2))+100%>" density="1.25">PLA (Yellow)</option>-->
-            <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(10*Math.ceil(Number(data.weight)*0.00125+2))+100%>" density="1.25">PLA (Blue)</option>-->
-            <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(10*Math.ceil(Number(data.weight)*0.00125+2))+100%>" density="1.25">PLA (Green)</option>-->
-            <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(10*Math.ceil(Number(data.weight)*0.00125+2))+100%>" density="1.25">PLA (Red)</option>-->
-            <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(12*Math.ceil(Number(data.weight)*0.00125+2))+100%>" density="1.25">PLA (Transparent)</option>-->
-            <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(12*Math.ceil(Number(data.weight)*0.00125+2))+100%>" density="1.25">ABS (White)</option>-->
-            <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(12*Math.ceil(Number(data.weight)*0.00125+2))+100%>" density="1.25">ABS (Black)</option>-->
-            <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(12*Math.ceil(Number(data.weight)*0.00125+2))+100%>" density="1.25">ABS (Brown)</option>-->
-            <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(12*Math.ceil(Number(data.weight)*0.00125+2))+100%>" density="1.25">ABS (Yellow)</option>-->
-            <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(12*Math.ceil(Number(data.weight)*0.00125+2))+100%>" density="1.25">ABS (Blue)</option>-->
-            <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(12*Math.ceil(Number(data.weight)*0.00125+2))+100%>" density="1.25">ABS (Green)</option>-->
-            <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(12*Math.ceil(Number(data.weight)*0.00125+2))+100%>" density="1.25">ABS (Red)</option>-->
-            <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(15*Math.ceil(Number(data.weight)*0.00121+2))+100%>" density="1.21">Flexible</option>-->
-            <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(25*Math.ceil(Number(data.weight)*0.00130+2))+100%>" density="1.3">Carbon Fibre</option>-->
-            <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(25*Math.ceil(Number(data.weight)*0.00110+2))+100%>" density="1.1">Nylon</option>-->
-            <!--  <input type="text" name="fileName" value="<%=data.fileName%>" style="display : none"/>-->
-            <!--</select>-->
-            <select class="custom-select" id="material<%=counter.toString();%>">
-              <!--<option value="PLA(white)" default id="disableMT<%=counter.toString();%>" >Material (default-PLA(White))</option>-->
-              <option value="PLA(white)" density="1.25" selected = "selected">PLA (White)</option>
-              <option value="PLA(black)" density="1.25">PLA (Black)</option>
-              <option value="PLA(brown)" density="1.25">PLA (Brown)</option>
-              <option value="PLA(yellow)" density="1.25">PLA (Yellow)</option>
-              <option value="PLA(blue)" density="1.25">PLA (Blue)</option>
-              <option value="PLA(green)" density="1.25">PLA (Green)</option>
-              <option value="PLA(red)" density="1.25">PLA (Red)</option>
-              <option value="TRA(transparent)" density="1.25">PLA (Transparent)</option>
-              <option value="ABS(white)" density="1.25">ABS (White)</option>
-              <option value="ABS(black)" density="1.25">ABS (Black)</option>
-              <option value="ABS(brown)" density="1.25">ABS (Brown)</option>
-              <option value="ABS(yellow)" density="1.25">ABS (Yellow)</option>
-              <option value="ABS(blue)" density="1.25">ABS (Blue)</option>
-              <option value="ABS(green)" density="1.25">ABS (Green)</option>
-              <option value="ABS(red)" density="1.25">ABS (Red)</option>
-              <option value="FLE(flexible)" density="1.21">Flexible</option>
-              <option value="CAR(carbonfibre)" density="1.3">Carbon Fibre</option>
-              <option value="NYL(nylon)" density="1.1">Nylon</option>
-              <input type="text" name="fileName" value="<%=data.fileName%>" style="display : none"/>
-            </select>
-        </div>
-        <div id="printer2<%=counter.toString()%>">  
-            <!--<select class="custom-select" id="material2<%=counter.toString();%>">-->
-            <!--  <option value="<%=Math.ceil((100*Math.ceil(Number(data.weight)*0.0012+2))+100)%>" default id="disableMT2<%=counter.toString();%>" >Material (default-Solid Resin)</option>-->
-            <!--  <option value="<%=Math.ceil((100*Math.ceil(Number(data.weight)*0.0012+2))+100)%>" density="1.2">Solid Resin</option>-->
-            <!--  <option value="<%=Math.ceil((200*Math.ceil(Number(data.weight)*0.0012+2))+100)%>" density="1.2">Casting Resin</option>-->
-            <!--  <input type="text" name="fileName" value="<%=data.fileName%>" style="display : none"/>-->
-            <!--</select>-->
-            <select class="custom-select" id="material2<%=counter.toString();%>">
-              <!--<option value="SRN(solidresin)" default id="disableMT2<%=counter.toString();%>" >Material (default-Solid Resin)</option>-->
-              <option value="SRN(solidresin)" density="1.2" selected = "selected">Solid Resin</option>
-              <option value="CRN(castresin)" density="1.2">Casting Resin</option>
-              <input type="text" name="fileName" value="<%=data.fileName%>" style="display : none"/>
-            </select>
-        </div>
-      <h3 id = 'processing<%=counter.toString();%>'></h3>
-      <form action="/modify/<%=data._id%>" method="POST" name="<%=data._id%>" id="modifyVal<%=counter.toString()%>">
-        <input id = "modifyfilename<%=counter.toString()%>" type="text" name="fileName" value="<%=data.fileName%>" style="display : none"/>
-        <input id = "databaseId<%=counter.toString()%>" type="text" name="=databaseId" value="<%=data._id%>" style="display : none"/>
-        <div class="row">
-          <div class="col-lg-5 col-md-5" >
-            <label class="mr-sm-2" for="inlineFormCustomSelect"><p style="font-size:16px;" id ='layerHeightText<%=counter.toString()%>'>Layer Height</p></label>
           </div>
-          <div class="col-lg-7 col-md-7" >
-          <select class="custom-select mr-sm-2" name="height" id="layerHeight<%=counter.toString()%>" >
-            <!--<option default id="disableLH<%=counter.toString()%>" value = "0.2">Normal 200µm</option>-->
-            <option value="0.1">Fine 100µm</option>
-            <option value="0.2" selected = "selected">Normal 200µm</option>
-            <option value="0.3">Coarse 300µm</option>
-            <!--<input type="text" name="fileName" value="<%=data.name%>" style="display : none"/>-->
-          </select>
-          </div>
-        </div>
-          <div class="row">
-            <div class="col-lg-5 col-md-5">
-              <label class="mr-sm-2" for="inlineFormCustomSelect"><p style="font-size:16px;" id = "infillText<%=counter.toString()%>" >Infill Percentage</p></label>
-            </div>
-            <div class="col-lg-7 col-md-7">
-            <select class="custom-select mr-sm-2" id="infill<%=counter.toString()%>" name='infill'>
-              <!--<option default id="disableIF<%=counter.toString()%>" value = "1.1667">High 30%</option>-->
-              <option value="1.1667" selected = "selected">High 30%</option>
-              <option value="3.5">Medium 20%</option>
-              <option value="7.0">Low 10%</option>
-            </select>
-            </div>
-        </div>
-        <button id="submit<%=counter.toString()%>" type="submit" style="display : none" class="button2"><span>Submit </span></button>    
-      </form>
-    </div>
-    
-    <div class="col-lg-4 col-md-4 addBackgroundColor" style="height:298px; border-radius: 0 .5rem .5rem 0">
+        </form>
+        <!--</div>-->
         
-        <h4 style="margin-top:10px;"><strong>Price : ₹<span id="price<%=counter.toString()%>"> <%= data.price %></span></strong></h4><p style="margin-bottom:1px;"> (Exclusive of GST)</p>
-        <div class="form-row align-items-center" style="margin-top:1px;">
-          <div class="col-auto my-1">
-            <label class="mr-sm-2" for="inlineFormCustomSelect"><h5 class=''></h5></label>
-          </div>
-          <div class="qty-input">
-            <i id="qtyless<%=counter.toString()%>" class="less">-</i>
-              <input id="qty<%=counter.toString()%>" type="text" value="1" disabled/>
-            <i id="qtymore<%=counter.toString()%>" class="more">+</i>
-          </div>
-        </div> 
-      <form action="/AddToCart/<%=data._id%>" id="<%=data._id%>" method="POST">
-        <input type="text" name="quantity"  id="quantity<%=counter.toString()%>" value="1"  style="display : none">
-        <input type="text" id="totalPrice<%=counter.toString()%>"  name="Price"  value="<%=Math.ceil(20*Number(data.printTime)+(10*Math.ceil(Number(data.weight)*0.00125+2))+100)%>"  style="display : none">
-        <input type="text" id="finalPrice<%=counter.toString()%>"  name="finalPrice"  value="<%=Math.ceil(20*Number(data.printTime)+(10*Math.ceil(Number(data.weight)*0.00125+2))+100)%>"  style="display : none">
-        <input type="text" name="fileName" value="<%=data.fileName%>" style="display : none"/>
-        <input type="text" id ="infilltocart<%=counter.toString()%>" name="infilltocart" value="30" style="display: none">
-        <input type="text" id ="layerheighttocart<%=counter.toString()%>" name="layerheighttocart" value="0.2" style="display: none">
-        <a href="#" class="btn btn-sm animated-button thar-one" onclick="document.getElementById('<%=data._id%>').submit();">Add to Cart</a> 
-        
-       
-        <a href="/delete/<%=data._id%>" name="delete" class="btn btn-sm animated-button victoria-one" value="<%=data.fileName%>">&nbsp;Delete</a>
-      </form>
-    </div>
-  </div>
-     
-    
-    
-  </div>
+        <hr>
+      </div>
   
-<% }); %>
- </div>
+      <div class="container">
+        <div class="row">
+          <% var counter = 0; %>
+          <% obj.forEach(function(data){ %>
+            <% counter = counter + 1; %>
+            <% var counterstr = counter.toString(); %>
+            <% console.log(counterstr); %>
+            <div class="col-lg-12 col-md-12 shadow" style="border: 1px solid darkgray; margin: 10px 0; height:300px; border-radius:  .5rem .5rem "  >
+              <div class="row">
+                <div class="thumbnail col-lg-4 col-md-4" style="border-right: 1px solid darkgray; height:298px; background-color:white; ">
+                  <img src="/<%=data.fileName%>.jpg" height="80%"/>
+                </div>
+                <div class="col-lg-4 col-md-4 addBackgroundColor" style="border-right: 1px solid darkgray; height:298px;">
+                  <h5 style="margin-top:10px;" id = "modelnametext<%=counter.toString();%>" ><%=data.fileName%></h5>
+                    <div style="margin-top:5px;">
+                      <select class="custom-select" id="printer<%=counter.toString();%>">
+                        <!--<option value="1" default id="disablePT<%=counter.toString();%>" >Printer (default-FDM Printer)</option>-->
+                        <!--<input type="text" name="filename"      id = "filename"      value="<%=data.fileName%>"  style="display : none"/>-->
+                        <!--<input type="text" name="fileweight"    id = "fileweight"    value="<%=data.weight%>"    style="display : none"/>-->
+                        <!--<input type="text" name="fileprinttime" id = "fileprinttime" value="<%=data.printTime%>" style="display : none"/>-->
+                        <option value="1" density="1.2" selected = "selected">FDM Printer</option>
+                        <option value="2" density="1.2">SLA Printer</option>
+                      </select>
+                    </div>
+                    <div id="printer1<%=counter.toString();%>">
+                      <!--<select class="custom-select" id="material<%=counter.toString();%>">-->
+                      <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(10*Math.ceil(Number(data.weight)*0.00125+2))+100%>" default id="disableMT<%=counter.toString();%>" >Material (default-PLA(White))</option>-->
+                      <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(10*Math.ceil(Number(data.weight)*0.00125+2))+100%>" density="1.25">PLA (White)</option>-->
+                      <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(10*Math.ceil(Number(data.weight)*0.00125+2))+100%>" density="1.25">PLA (Black)</option>-->
+                      <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(10*Math.ceil(Number(data.weight)*0.00125+2))+100%>" density="1.25">PLA (Brown)</option>-->
+                      <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(10*Math.ceil(Number(data.weight)*0.00125+2))+100%>" density="1.25">PLA (Yellow)</option>-->
+                      <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(10*Math.ceil(Number(data.weight)*0.00125+2))+100%>" density="1.25">PLA (Blue)</option>-->
+                      <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(10*Math.ceil(Number(data.weight)*0.00125+2))+100%>" density="1.25">PLA (Green)</option>-->
+                      <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(10*Math.ceil(Number(data.weight)*0.00125+2))+100%>" density="1.25">PLA (Red)</option>-->
+                      <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(12*Math.ceil(Number(data.weight)*0.00125+2))+100%>" density="1.25">PLA (Transparent)</option>-->
+                      <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(12*Math.ceil(Number(data.weight)*0.00125+2))+100%>" density="1.25">ABS (White)</option>-->
+                      <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(12*Math.ceil(Number(data.weight)*0.00125+2))+100%>" density="1.25">ABS (Black)</option>-->
+                      <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(12*Math.ceil(Number(data.weight)*0.00125+2))+100%>" density="1.25">ABS (Brown)</option>-->
+                      <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(12*Math.ceil(Number(data.weight)*0.00125+2))+100%>" density="1.25">ABS (Yellow)</option>-->
+                      <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(12*Math.ceil(Number(data.weight)*0.00125+2))+100%>" density="1.25">ABS (Blue)</option>-->
+                      <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(12*Math.ceil(Number(data.weight)*0.00125+2))+100%>" density="1.25">ABS (Green)</option>-->
+                      <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(12*Math.ceil(Number(data.weight)*0.00125+2))+100%>" density="1.25">ABS (Red)</option>-->
+                      <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(15*Math.ceil(Number(data.weight)*0.00121+2))+100%>" density="1.21">Flexible</option>-->
+                      <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(25*Math.ceil(Number(data.weight)*0.00130+2))+100%>" density="1.3">Carbon Fibre</option>-->
+                      <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(25*Math.ceil(Number(data.weight)*0.00110+2))+100%>" density="1.1">Nylon</option>-->
+                      <!--  <input type="text" name="fileName" value="<%=data.fileName%>" style="display : none"/>-->
+                      <!--</select>-->
+                      <select class="custom-select" id="material<%=counter.toString();%>">
+                        <!--<option value="PLA(white)" default id="disableMT<%=counter.toString();%>" >Material (default-PLA(White))</option>-->
+                        <option value="PLA(white)" density="1.25" selected = "selected">PLA (White)</option>
+                        <option value="PLA(black)" density="1.25">PLA (Black)</option>
+                        <option value="PLA(brown)" density="1.25">PLA (Brown)</option>
+                        <option value="PLA(yellow)" density="1.25">PLA (Yellow)</option>
+                        <option value="PLA(blue)" density="1.25">PLA (Blue)</option>
+                        <option value="PLA(green)" density="1.25">PLA (Green)</option>
+                        <option value="PLA(red)" density="1.25">PLA (Red)</option>
+                        <option value="TRA(transparent)" density="1.25">PLA (Transparent)</option>
+                        <option value="ABS(white)" density="1.25">ABS (White)</option>
+                        <option value="ABS(black)" density="1.25">ABS (Black)</option>
+                        <option value="ABS(brown)" density="1.25">ABS (Brown)</option>
+                        <option value="ABS(yellow)" density="1.25">ABS (Yellow)</option>
+                        <option value="ABS(blue)" density="1.25">ABS (Blue)</option>
+                        <option value="ABS(green)" density="1.25">ABS (Green)</option>
+                        <option value="ABS(red)" density="1.25">ABS (Red)</option>
+                        <option value="FLE(flexible)" density="1.21">Flexible</option>
+                        <option value="CAR(carbonfibre)" density="1.3">Carbon Fibre</option>
+                        <option value="NYL(nylon)" density="1.1">Nylon</option>
+                        <input type="text" name="fileName" value="<%=data.fileName%>" style="display : none"/>
+                      </select>
+                    </div>
+                    <div id="printer2<%=counter.toString()%>">  
+                      <!--<select class="custom-select" id="material2<%=counter.toString();%>">-->
+                      <!--  <option value="<%=Math.ceil((100*Math.ceil(Number(data.weight)*0.0012+2))+100)%>" default id="disableMT2<%=counter.toString();%>" >Material (default-Solid Resin)</option>-->
+                      <!--  <option value="<%=Math.ceil((100*Math.ceil(Number(data.weight)*0.0012+2))+100)%>" density="1.2">Solid Resin</option>-->
+                      <!--  <option value="<%=Math.ceil((200*Math.ceil(Number(data.weight)*0.0012+2))+100)%>" density="1.2">Casting Resin</option>-->
+                      <!--  <input type="text" name="fileName" value="<%=data.fileName%>" style="display : none"/>-->
+                      <!--</select>-->
+                      <select class="custom-select" id="material2<%=counter.toString();%>">
+                        <!--<option value="SRN(solidresin)" default id="disableMT2<%=counter.toString();%>" >Material (default-Solid Resin)</option>-->
+                        <option value="SRN(solidresin)" density="1.2" selected = "selected">Solid Resin</option>
+                        <option value="CRN(castresin)" density="1.2">Casting Resin</option>
+                        <input type="text" name="fileName" value="<%=data.fileName%>" style="display : none"/>
+                      </select>
+                    </div>
+                    <h3 id = 'processing<%=counter.toString();%>'></h3>
+                    <form action="/modify/<%=data._id%>" method="POST" name="<%=data._id%>" id="modifyVal<%=counter.toString()%>">
+                      <input id = "modifyfilename<%=counter.toString()%>" type="text" name="fileName" value="<%=data.fileName%>" style="display : none"/>
+                      <input id = "databaseId<%=counter.toString()%>" type="text" name="=databaseId" value="<%=data._id%>" style="display : none"/>
+                      <div class="row">
+                        <div class="col-lg-5 col-md-5" >
+                          <label class="mr-sm-2" for="inlineFormCustomSelect"><p style="font-size:16px;" id ='layerHeightText<%=counter.toString()%>'>Layer Height</p></label>
+                        </div>
+                        <div class="col-lg-7 col-md-7" >
+                          <select class="custom-select mr-sm-2" name="height" id="layerHeight<%=counter.toString()%>" >
+                            <!--<option default id="disableLH<%=counter.toString()%>" value = "0.2">Normal 200µm</option>-->
+                            <option value="0.1">Fine 100µm</option>
+                            <option value="0.2" selected = "selected">Normal 200µm</option>
+                            <option value="0.3">Coarse 300µm</option>
+                            <!--<input type="text" name="fileName" value="<%=data.name%>" style="display : none"/>-->
+                          </select>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-5 col-md-5">
+                          <label class="mr-sm-2" for="inlineFormCustomSelect"><p style="font-size:16px;" id = "infillText<%=counter.toString()%>" >Infill Percentage</p></label>
+                        </div>
+                        <div class="col-lg-7 col-md-7">
+                          <select class="custom-select mr-sm-2" id="infill<%=counter.toString()%>" name='infill'>
+                            <!--<option default id="disableIF<%=counter.toString()%>" value = "1.1667">High 30%</option>-->
+                            <option value="1.1667" selected = "selected">High 30%</option>
+                            <option value="3.5">Medium 20%</option>
+                            <option value="7.0">Low 10%</option>
+                          </select>
+                        </div>
+                      </div>
+                      <button id="submit<%=counter.toString()%>" type="submit" style="display : none" class="button2"><span>Submit </span></button>    
+                    </form>
+                  </div>
+                  <div class="col-lg-4 col-md-4 addBackgroundColor" style="height:298px; border-radius: 0 .5rem .5rem 0">
+                    <h4 style="margin-top:10px;"><strong>Price : ₹<span id="price<%=counter.toString()%>"> <%= data.price %></span></strong></h4><p style="margin-bottom:1px;"> (Exclusive of GST)</p>
+                    <div class="form-row align-items-center" style="margin-top:1px;">
+                      <div class="col-auto my-1">
+                        <label class="mr-sm-2" for="inlineFormCustomSelect"><h5 class=''></h5></label>
+                      </div>
+                      <div class="qty-input">
+                        <i id="qtyless<%=counter.toString()%>" class="less">-</i>
+                          <input id="qty<%=counter.toString()%>" type="text" value="1" disabled/>
+                        <i id="qtymore<%=counter.toString()%>" class="more">+</i>
+                      </div>
+                    </div> 
+                  <form action="/AddToCart/<%=data._id%>" id="<%=data._id%>" method="POST">
+                    <input type="text" name="quantity"  id="quantity<%=counter.toString()%>" value="1"  style="display : none">
+                    <input type="text" id="totalPrice<%=counter.toString()%>"  name="Price"  value="<%=Math.ceil(20*Number(data.printTime)+(10*Math.ceil(Number(data.weight)*0.00125+2))+100)%>"  style="display : none">
+                    <input type="text" id="finalPrice<%=counter.toString()%>"  name="finalPrice"  value="<%=Math.ceil(20*Number(data.printTime)+(10*Math.ceil(Number(data.weight)*0.00125+2))+100)%>"  style="display : none">
+                    <input type="text" name="fileName" value="<%=data.fileName%>" style="display : none"/>
+                    <input type="text" id ="infilltocart<%=counter.toString()%>" name="infilltocart" value="30" style="display: none">
+                    <input type="text" id ="layerheighttocart<%=counter.toString()%>" name="layerheighttocart" value="0.2" style="display: none">
+                    <a href="#" class="btn btn-sm animated-button thar-one" onclick="document.getElementById('<%=data._id%>').submit();">Add to Cart</a> 
+                    <a href="/delete/<%=data._id%>" name="delete" class="btn btn-sm animated-button victoria-one" value="<%=data.fileName%>">&nbsp;Delete</a>
+                  </form>
+                </div>
+              </div>
+            </div>
+          <% }); %>
+        </div>
+      </div>
+    </div>
   </div>
-    
-</div>
-</div>
+
+
+
+
+
 <script>
 
 // on layer height change first instane
