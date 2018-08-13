@@ -2,7 +2,7 @@ A web app to show instantaneous quotation of 3-D Models using a powerful tool Cu
 
 Install Curaengine on your server side.
 
-Steps to install Curaengine:-
+# Steps to install Curaengine:-
 
 1. Clone the repository from https://github.com/Ultimaker/CuraEngine.git (the URL at the right hand side of this page).
 
@@ -24,7 +24,7 @@ Project files generation:
 3. (for a list of supported IDE's see         http://www.cmake.org/Wiki/CMake_Generator_Specific_Information#Code::Blocks_Generator)
 
 
-Installing Protobuf
+# Installing Protobuf
 
 1. Be sure to have libtool installed.
 2. Download protobuf from https://github.com/google/protobuf/releases (download ZIP and unZIP at desired location, or clone the repo). The protocol buffer is used for communication between the CuraEngine and the GUI.
@@ -35,7 +35,6 @@ Installing Protobuf
 
 5. $ make
 
-6. # make install
-(Please note the #. It indicates the need of superuser, as known as root, priviliges.)
+6. $ make install
 
 7. (In case the shared library cannot be loaded, you can try sudo ldconfig on Linux systems)
