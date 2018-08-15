@@ -24,7 +24,8 @@ var nodemailer                     = require("nodemailer");
 // var LocalStrategy               = require ("passport-local");
 // var passportLocalMongoose       = require("passport-local-mongoose");
 // var adminroutes                 = require("./config/adminpanel.js");
-var keys                           = require ("./config/keys.js")
+var keys                           = require('./config/keys.js');
+
 
 // set view engine
 app.set('view engine', 'ejs');
@@ -80,7 +81,8 @@ var uploadSchema = new mongoose.Schema({
     price            : String,
     material         : String,
     lh               : String,
-    infill           : String,
+    infillDensity    : String,
+    infillPercentage : String,
     quantity         : String,
     modweight        : String,
     modtime          : String
@@ -178,9 +180,9 @@ passport.deserializeUser((id, done) => {
 
 // passport middleware
 passport.use(new GoogleStrategy({
-    clientID: keys.google.clientID,
+    clientID: keys.google.clientId,
     clientSecret: keys.google.clientSecret,
-    callbackURL: "https://stormy-plains-23195.herokuapp.com/auth/google/redirect"
+    callbackURL: "https://sadfdf-swastik0310.c9users.io/auth/google/redirect"
   }, (accessToken, refreshToken, profile, done) => {
       //console.log(refreshToken);
         // check if user already exists in our own db
@@ -230,8 +232,8 @@ passport.use(new GoogleStrategy({
 
 
 let rzp = new Razorpay({
-  key_id: keys.razorpay.keyid, // your `KEY_ID`
-  key_secret: keys.razorpay.keysecret // your `KEY_SECRET`
+  key_id: keys.razorpay.keyid,
+  key_secret: keys.razorpay.keysecret
 })
 
 
@@ -351,7 +353,7 @@ app.post('/upload', authCheck, (req, res) => {
                         
                 //     }
                 // })
-                   Upload.create({googleId: req.user.googleId, fileName: sampleFileName, printTime: dataTime, weight: dataWeight, price: price, material: "PLA(white)", lh: "0.2", infill: "30%", quantity: "1"}, function(err, newupload){
+                   Upload.create({googleId: req.user.googleId, fileName: sampleFileName, printTime: dataTime, weight: dataWeight, price: price, material: "PLA(white)", lh: "0.2", infillDensity: "1.1667", infillPercentage: "30%", quantity: "1"}, function(err, newupload){
                        if(err){
                            console.log (err);
                        }
@@ -657,11 +659,6 @@ app.get("/iamrapidadmin", function(req, res){
 
 
 app.get("/uploadfile/modify-layer-height/:lh/:infill/:name/:id/:material", function (req, res){
-    // var str = req.params.id;
-    // console.log(typeof str);
-    // console.log(str);
-    // var lh = str.slice(0,3)
-    // var name = str.slice(3);
     console.log(req.params.lh);
     console.log(req.params.name);
     console.log(req.params.id);
@@ -739,7 +736,7 @@ app.get("/uploadfile/modify-layer-height/:lh/:infill/:name/:id/:material", funct
             var price = finalweight * 25 + dataTime * 20 + 100;
             console.log ("price is !!!!!!!!", price);  
         }
-        Upload.findByIdAndUpdate(req.params.id, {modtime: Number(dataTime), modweight: Number(dataWeight), price: price}, function(err, updatedRapid){
+        Upload.findByIdAndUpdate(req.params.id, {modtime: Number(dataTime), modweight: Number(dataWeight), price: price, lh: lh}, function(err, updatedRapid){
             if(err){
                 console.log(err);
                 res.render ("somethingwentwrong");
@@ -776,6 +773,15 @@ app.get("/uploadfile/modify-infill-percentage/:infill/:lh/:name/:id/:material", 
     var name = req.params.name;
     var id = req.params.id;
     var infill = req.params.infill;
+    if (infill == "1.1667"){
+        var infillPer = "30%";
+    }
+    if (infill == "3.5"){
+        var infillPer = "20%";
+    }
+     if (infill == "7.0"){
+        var infillPer = "10%";
+    }
     console.log(infill);
     console.log(typeof infill);
     var material = req.params.material;
@@ -846,7 +852,7 @@ app.get("/uploadfile/modify-infill-percentage/:infill/:lh/:name/:id/:material", 
             var price = finalweight * 25 + dataTime * 20 + 100;
             console.log ("price is !!!!!!!!", price);  
         }
-        Upload.findByIdAndUpdate(req.params.id, {modtime: Number(dataTime), modweight: Number(dataWeight), price: price}, function(err, updatedRapid){
+        Upload.findByIdAndUpdate(req.params.id, {modtime: Number(dataTime), modweight: Number(dataWeight), price: price, infillDensity: infill, infillPercentage: infillPer}, function(err, updatedRapid){
             if(err){
                 console.log(err);
                 res.render("somethingwentwrong");

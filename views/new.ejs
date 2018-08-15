@@ -84,37 +84,11 @@
                   <h5 style="margin-top:10px;" id = "modelnametext<%=counter.toString();%>" ><%=data.fileName%></h5>
                     <div style="margin-top:5px;">
                       <select class="custom-select" id="printer<%=counter.toString();%>">
-                        <!--<option value="1" default id="disablePT<%=counter.toString();%>" >Printer (default-FDM Printer)</option>-->
-                        <!--<input type="text" name="filename"      id = "filename"      value="<%=data.fileName%>"  style="display : none"/>-->
-                        <!--<input type="text" name="fileweight"    id = "fileweight"    value="<%=data.weight%>"    style="display : none"/>-->
-                        <!--<input type="text" name="fileprinttime" id = "fileprinttime" value="<%=data.printTime%>" style="display : none"/>-->
                         <option value="1" density="1.2" selected = "selected">FDM Printer</option>
                         <option value="2" density="1.2">SLA Printer</option>
                       </select>
                     </div>
                     <div id="printer1<%=counter.toString();%>">
-                      <!--<select class="custom-select" id="material<%=counter.toString();%>">-->
-                      <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(10*Math.ceil(Number(data.weight)*0.00125+2))+100%>" default id="disableMT<%=counter.toString();%>" >Material (default-PLA(White))</option>-->
-                      <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(10*Math.ceil(Number(data.weight)*0.00125+2))+100%>" density="1.25">PLA (White)</option>-->
-                      <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(10*Math.ceil(Number(data.weight)*0.00125+2))+100%>" density="1.25">PLA (Black)</option>-->
-                      <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(10*Math.ceil(Number(data.weight)*0.00125+2))+100%>" density="1.25">PLA (Brown)</option>-->
-                      <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(10*Math.ceil(Number(data.weight)*0.00125+2))+100%>" density="1.25">PLA (Yellow)</option>-->
-                      <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(10*Math.ceil(Number(data.weight)*0.00125+2))+100%>" density="1.25">PLA (Blue)</option>-->
-                      <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(10*Math.ceil(Number(data.weight)*0.00125+2))+100%>" density="1.25">PLA (Green)</option>-->
-                      <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(10*Math.ceil(Number(data.weight)*0.00125+2))+100%>" density="1.25">PLA (Red)</option>-->
-                      <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(12*Math.ceil(Number(data.weight)*0.00125+2))+100%>" density="1.25">PLA (Transparent)</option>-->
-                      <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(12*Math.ceil(Number(data.weight)*0.00125+2))+100%>" density="1.25">ABS (White)</option>-->
-                      <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(12*Math.ceil(Number(data.weight)*0.00125+2))+100%>" density="1.25">ABS (Black)</option>-->
-                      <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(12*Math.ceil(Number(data.weight)*0.00125+2))+100%>" density="1.25">ABS (Brown)</option>-->
-                      <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(12*Math.ceil(Number(data.weight)*0.00125+2))+100%>" density="1.25">ABS (Yellow)</option>-->
-                      <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(12*Math.ceil(Number(data.weight)*0.00125+2))+100%>" density="1.25">ABS (Blue)</option>-->
-                      <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(12*Math.ceil(Number(data.weight)*0.00125+2))+100%>" density="1.25">ABS (Green)</option>-->
-                      <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(12*Math.ceil(Number(data.weight)*0.00125+2))+100%>" density="1.25">ABS (Red)</option>-->
-                      <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(15*Math.ceil(Number(data.weight)*0.00121+2))+100%>" density="1.21">Flexible</option>-->
-                      <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(25*Math.ceil(Number(data.weight)*0.00130+2))+100%>" density="1.3">Carbon Fibre</option>-->
-                      <!--  <option value="<%=Math.ceil(20*Number(data.printTime))+(25*Math.ceil(Number(data.weight)*0.00110+2))+100%>" density="1.1">Nylon</option>-->
-                      <!--  <input type="text" name="fileName" value="<%=data.fileName%>" style="display : none"/>-->
-                      <!--</select>-->
                       <select class="custom-select" id="material<%=counter.toString();%>">
                         <!--<option value="PLA(white)" default id="disableMT<%=counter.toString();%>" >Material (default-PLA(White))</option>-->
                         <option value="PLA(white)" density="1.25" selected = "selected">PLA (White)</option>
@@ -139,12 +113,6 @@
                       </select>
                     </div>
                     <div id="printer2<%=counter.toString()%>">  
-                      <!--<select class="custom-select" id="material2<%=counter.toString();%>">-->
-                      <!--  <option value="<%=Math.ceil((100*Math.ceil(Number(data.weight)*0.0012+2))+100)%>" default id="disableMT2<%=counter.toString();%>" >Material (default-Solid Resin)</option>-->
-                      <!--  <option value="<%=Math.ceil((100*Math.ceil(Number(data.weight)*0.0012+2))+100)%>" density="1.2">Solid Resin</option>-->
-                      <!--  <option value="<%=Math.ceil((200*Math.ceil(Number(data.weight)*0.0012+2))+100)%>" density="1.2">Casting Resin</option>-->
-                      <!--  <input type="text" name="fileName" value="<%=data.fileName%>" style="display : none"/>-->
-                      <!--</select>-->
                       <select class="custom-select" id="material2<%=counter.toString();%>">
                         <!--<option value="SRN(solidresin)" default id="disableMT2<%=counter.toString();%>" >Material (default-Solid Resin)</option>-->
                         <option value="SRN(solidresin)" density="1.2" selected = "selected">Solid Resin</option>
@@ -166,7 +134,7 @@
                             <option value="0.1">Fine 100µm</option>
                             <option value="0.2" selected = "selected">Normal 200µm</option>
                             <option value="0.3">Coarse 300µm</option>
-                            <!--<input type="text" name="fileName" value="<%=data.name%>" style="display : none"/>-->
+                            <input type="text" id = "storeLayerHeight<%=counter.toString()%>" value="<%=data.lh%>" style="display : none"/>
                           </select>
                         </div>
                       </div>
@@ -180,6 +148,7 @@
                             <option value="1.1667" selected = "selected">High 30%</option>
                             <option value="3.5">Medium 20%</option>
                             <option value="7.0">Low 10%</option>
+                            <input type="text" id = "storeInfill<%=counter.toString()%>" value="<%=data.infillDensity%>" style="display : none"/>
                           </select>
                         </div>
                       </div>
@@ -217,11 +186,37 @@
     </div>
   </div>
 
-
-
-
-
 <script>
+var lh1 = $('#storeLayerHeight1').val();
+$("#layerHeight1").val(lh1).change();
+
+var lh2 = $('#storeLayerHeight2').val();
+$("#layerHeight2").val(lh2).change();
+
+var lh3 = $('#storeLayerHeight3').val();
+$("#layerHeight3").val(lh3).change();
+
+var lh4 = $('#storeLayerHeight4').val();
+$("#layerHeight4").val(lh4).change();
+
+var lh5 = $('#storeLayerHeight5').val();
+$("#layerHeight5").val(lh5).change();
+
+
+var inf1 = $('#storeInfill1').val();
+$("#infill1").val(inf1).change();
+
+var inf2 = $('#storeInfill2').val();
+$("#infill2").val(inf2).change();
+
+var inf3 = $('#storeInfill3').val();
+$("#infill3").val(inf3).change();
+
+var inf4 = $('#storeInfill4').val();
+$("#infill4").val(inf4).change();
+
+var inf5 = $('#storeInfill5').val();
+$("#infill5").val(inf5).change();
 
 // on layer height change first instane
 $( "#layerHeight1" ).change(function(){
