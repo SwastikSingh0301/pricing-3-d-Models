@@ -231,7 +231,7 @@ passport.use(new GoogleStrategy({
 
 
 
-let rzp = new Razorpay({
+var rzp = new Razorpay({
   key_id: 'rzp_test_2ZhVhf0meouzDo',
   key_secret: 'dBKHC7ZWSzapnbS0Sm2kK8vs'
 })
@@ -321,7 +321,7 @@ app.post('/upload', authCheck, (req, res) => {
     if (!req.files)
         return res.status(400).send('No files were uploaded.');
      
-    let sampleFile = req.files.sampleFile;
+    var sampleFile = req.files.sampleFile;
     sampleFileName = req.files.sampleFile.name;
     console.log(sampleFileName);
     
@@ -332,7 +332,7 @@ app.post('/upload', authCheck, (req, res) => {
         {
             //stltoimg();
             var cmdURL = commandURL();
-            let file = editJson("Cura/resources/machines/fdmprinter.json");
+            var file = editJson("Cura/resources/machines/fdmprinter.json");
             file.get().categories.resolution.settings.layer_height.default = 0.2;
             file.get().categories.infill.settings.infill_sparse_density.children.infill_line_distance.default = 1.1667;
             file.save();
@@ -424,7 +424,7 @@ app.get("/upload/zip", authCheck, function(req, res) {
         stltoimg();
         //console.log("Cura Start");
         var cmdURL = commandURL();
-        let file = editJson("Cura/resources/machines/fdmprinter.json");
+        var file = editJson("Cura/resources/machines/fdmprinter.json");
         file.get().categories.resolution.settings.layer_height.default = 0.2;
         file.get().categories.infill.settings.infill_sparse_density.children.infill_line_distance.default = 1.1667;
         file.save();
@@ -503,7 +503,7 @@ app.post("/modify/:id",function(req,res){
     //       fs.writeFileSync("findingFanny.txt", req);
     //console.log(layerHeight + "  " + infill);
      
-    let file = editJson("Cura/resources/machines/fdmprinter.json");
+    var file = editJson("Cura/resources/machines/fdmprinter.json");
     file.get().categories.resolution.settings.layer_height.default = layerHeight;
     file.get().categories.infill.settings.infill_sparse_density.children.infill_line_distance.default = infill;
     file.save();
@@ -678,7 +678,7 @@ app.get("/uploadfile/modify-layer-height/:lh/:infill/:name/:id/:material", funct
     console.log(typeof material);
     var matid = material.slice(0,3);
     var cmdURL = modifyCommandURL(name);
-        let file = editJson("Cura/resources/machines/fdmprinter.json");
+        var file = editJson("Cura/resources/machines/fdmprinter.json");
     file.get().categories.resolution.settings.layer_height.default = Number(lh);
     file.get().categories.infill.settings.infill_sparse_density.children.infill_line_distance.default = Number(infill);
     file.save();
@@ -794,7 +794,7 @@ app.get("/uploadfile/modify-infill-percentage/:infill/:lh/:name/:id/:material", 
     console.log(typeof material);
     var matid = material.slice(0,3);
     var cmdURL = modifyCommandURL(name);
-        let file = editJson("Cura/resources/machines/fdmprinter.json");
+        var file = editJson("Cura/resources/machines/fdmprinter.json");
     file.get().categories.resolution.settings.layer_height.default = Number(lh);
     file.get().categories.infill.settings.infill_sparse_density.children.infill_line_distance.default = Number(infill);
     file.save();
