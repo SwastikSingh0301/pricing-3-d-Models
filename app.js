@@ -3,7 +3,7 @@ var app                            = express();
 var bodyParser                     = require("body-parser");
 var fs                             = require("fs");
 var cmd                            = require('node-cmd');
-var StlThumbnailer                 = require('node-stl-thumbnailer');
+//var StlThumbnailer                 = require('node-stl-thumbnailer');
 var fileUpload                     = require("express-fileupload");
 var unzip                          = require("unzip-stream");
 const methodOverride               = require('method-override');
@@ -252,6 +252,11 @@ app.get("/", function (req,res){
 });
 
 
+// hire a designer route
+app.get ("/contact-us", function (req, res){
+   res.render ("hireDesigner"); 
+});
+
 //==============================================================================
 //  AUTH ROUTES
 //==============================================================================
@@ -325,7 +330,7 @@ app.post('/upload', authCheck, (req, res) => {
           return res.status(500).send(err);
         if(sampleFile.mimetype ==='application/octet-stream')
         {
-            stltoimg();
+            //stltoimg();
             var cmdURL = commandURL();
             let file = editJson("Cura/resources/machines/fdmprinter.json");
             file.get().categories.resolution.settings.layer_height.default = 0.2;
