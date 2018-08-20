@@ -24,7 +24,7 @@ var nodemailer                     = require("nodemailer");
 // var LocalStrategy               = require ("passport-local");
 // var passportLocalMongoose       = require("passport-local-mongoose");
 // var adminroutes                 = require("./config/adminpanel.js");
-var keys                           = require('./config/keys.js');
+//var keys                           = require('./config/keys.js');
 
 
 // set view engine
